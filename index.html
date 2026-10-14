@@ -1456,7 +1456,7 @@
         customConfigPanel.style.display = 'block';
         heroTitle.textContent = 'Custom Dataset: Live Client-Side Regression Explorer';
         heroDescription.innerHTML = 'Load arbitrary CSV data via public URL or local upload. Our in-browser matrix engine performs ordinary least squares (OLS) regression, calculates exact ANOVA metrics, $R^2$, RMSE, and diagnostic residuals in real-time.';
-        heroDatasetName.textContent = customDataset ? `Custom CSV (${customDataset.data.length} rows)` : 'No custom dataset loaded yet';
+        heroDatasetName.textContent = customDataset ? `Custom CSV (${customDataset.rows.length} rows)` : 'No custom dataset loaded yet';
         heroSweetPill.style.display = 'none';
         heroCliffPill.style.display = 'none';
         predictorTitle.textContent = 'Live Model Predictor';
