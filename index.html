@@ -947,13 +947,13 @@
     <div class="hero-card" id="heroCard">
       <h2 id="heroTitle">50 Startups: Feature Selection & Parsimony Analysis</h2>
       <p id="heroDescription">
-        Compare 5 Machine Learning Feature Selection Algorithms (<strong>Lasso</strong>, <strong>Forward SFS</strong>, <strong>RFE</strong>, <strong>ElasticNet</strong>, <strong>Exhaustive Search</strong>) against Baseline OLS. Explore the bias-variance tradeoff across feature counts $k=1 \dots 5$, pinpointing the <strong>2-feature optimal sweet spot</strong> and the <strong>5-feature overfitting cliff</strong>.
+        Compare five feature-selection methods ranked on training data and evaluated on a held-out test set.
       </p>
       <div class="hero-tags" id="heroTags">
         <span class="hero-pill"><i class="fa-solid fa-database"></i> <span id="heroDatasetName">50 Startups Dataset (50 rows)</span></span>
         <span class="hero-pill"><i class="fa-solid fa-bolt"></i> 5 ML Selection Methods</span>
-        <span class="hero-pill" id="heroSweetPill"><i class="fa-solid fa-star" style="color: #34d399;"></i> Sweet Spot: k=2 ($8,198.80 RMSE)</span>
-        <span class="hero-pill" id="heroCliffPill"><i class="fa-solid fa-triangle-exclamation" style="color: #fbbf24;"></i> Overfitting: k=5 ($9,137.99 RMSE)</span>
+        <span class="hero-pill" id="heroSweetPill"><i class="fa-solid fa-star" style="color: #34d399;"></i> Best Test RMSE</span>
+        <span class="hero-pill" id="heroSplitPill"><i class="fa-solid fa-scale-balanced"></i> Train/Test Split</span>
       </div>
     </div>
 
@@ -1068,7 +1068,7 @@
           <span>Test RMSE</span>
           <span class="badge-tag badge-green" id="rmseBadge"><i class="fa-solid fa-award"></i> Optimal</span>
         </div>
-        <div class="metric-val" id="valRMSE">$8,198.80</div>
+        <div class="metric-val" id="valRMSE">Loading...</div>
         <div class="metric-note">
           <span>Lower is better (Minimizes residual error)</span>
         </div>
@@ -1077,11 +1077,11 @@
       <div class="metric-card sweet" id="kpiCardR2">
         <div class="metric-title">
           <span>R² Score</span>
-          <span class="badge-tag badge-blue" id="r2Badge"><i class="fa-solid fa-circle-check"></i> High Fit</span>
+          <span class="badge-tag badge-blue" id="r2Badge">Test Set</span>
         </div>
-        <div class="metric-val" id="valR2">0.9474</div>
+        <div class="metric-val" id="valR2">Loading...</div>
         <div class="metric-note">
-          <span id="r2Note">Explains variance of target</span>
+          <span id="r2Note">Variance explained on held-out test rows</span>
         </div>
       </div>
 
@@ -1090,9 +1090,9 @@
           <span>Adjusted R²</span>
           <i class="fa-solid fa-scale-balanced" style="color: var(--slate-400);"></i>
         </div>
-        <div class="metric-val" id="valAdjR2">0.9324</div>
+        <div class="metric-val" id="valAdjR2">Loading...</div>
         <div class="metric-note">
-          <span>Penalizes redundant parameters</span>
+          <span>Test-set R² adjusted for feature count</span>
         </div>
       </div>
 
@@ -1101,9 +1101,9 @@
           <span>Mean Absolute Error</span>
           <i class="fa-solid fa-calculator" style="color: var(--slate-400);"></i>
         </div>
-        <div class="metric-val" id="valMAE">$6,488.75</div>
+        <div class="metric-val" id="valMAE">Loading...</div>
         <div class="metric-note">
-          <span>Average prediction absolute error</span>
+          <span>Mean absolute error on held-out test rows</span>
         </div>
       </div>
 
@@ -1112,9 +1112,9 @@
           <span>F-Statistic</span>
           <span class="badge-tag badge-green" id="fStatPval">p &lt; 0.0001</span>
         </div>
-        <div class="metric-val" id="valFStat">347.8</div>
+        <div class="metric-val" id="valFStat">Loading...</div>
         <div class="metric-note">
-          <span>Overall model statistical significance</span>
+          <span>Training-set model significance</span>
         </div>
       </div>
     </div>
@@ -1131,7 +1131,7 @@
         </div>
       </div>
       <div id="parsimonyNotice" class="badge-tag badge-green" style="font-size: 12px; padding: 4px 10px;">
-        <i class="fa-solid fa-star"></i> Occam's Razor: 2-feature model minimizes error.
+        Select a model to inspect its held-out test performance.
       </div>
     </div>
 
@@ -1142,7 +1142,7 @@
         <div class="card-header">
           <div class="card-title-group">
             <h3><i class="fa-solid fa-chart-line" style="color: var(--primary);"></i> RMSE by Number of Features</h3>
-            <div class="card-subtitle">Lower is better. Pinpoints sweet spot and overfitting cliff.</div>
+            <div class="card-subtitle">Lower is better. Compared on held-out test data.</div>
           </div>
           <span class="badge-tag badge-blue" id="rmseChartBadge">Lasso (L1)</span>
         </div>
@@ -1156,9 +1156,9 @@
         <div class="card-header">
           <div class="card-title-group">
             <h3><i class="fa-solid fa-arrow-trend-up" style="color: var(--accent-emerald);"></i> R-squared by Number of Features</h3>
-            <div class="card-subtitle">Higher is better. Measures variance explained.</div>
+            <div class="card-subtitle">Higher is better. R² on held-out test data.</div>
           </div>
-          <span class="badge-tag badge-green" id="r2ChartBadge">Peak fit</span>
+          <span class="badge-tag badge-green" id="r2ChartBadge">Test R²</span>
         </div>
         <div class="chart-container">
           <canvas id="r2Chart"></canvas>
@@ -1171,7 +1171,7 @@
       <div class="card-header">
         <div class="card-title-group">
           <h3><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Feature Progression Summary Table</h3>
-          <div class="card-subtitle">Model progression across feature counts k, showing selected features, RMSE, and R-squared.</div>
+          <div class="card-subtitle">Features selected on training data; RMSE and R² evaluated on held-out test data.</div>
         </div>
         <span class="badge-tag badge-green"><i class="fa-solid fa-award"></i> Benchmark Progression</span>
       </div>
@@ -1199,7 +1199,7 @@
         <i class="fa-solid fa-square-root-variable"></i> Fitted OLS Regression Equation
       </div>
       <div class="equation-formula" id="equationBox">
-        Profit = 46,346.34 + 0.7886 × (R&D Spend) + 0.0326 × (Marketing Spend)
+        Loading model...
       </div>
     </div>
 
@@ -1211,7 +1211,7 @@
         <div class="card-header">
           <div class="card-title-group">
             <h3><i class="fa-solid fa-table" style="color: var(--primary);"></i> Model Coefficients & Statistical Tests</h3>
-            <div class="card-subtitle">Parameter estimates, standard errors, t-statistics, p-values, and VIF multicollinearity.</div>
+            <div class="card-subtitle">OLS estimates and inference from training data; test metrics are reported separately.</div>
           </div>
         </div>
         <div class="table-responsive">
@@ -1328,7 +1328,7 @@
     // Global State
     let currentProblem = '50startups'; // '50startups' | 'boston' | 'custom'
     let currentAlgo = 'Lasso';
-    let currentK = 2; // Default for 50 startups sweet spot
+    let currentK = 1;
     let rmseChartInstance = null;
     let r2ChartInstance = null;
 
@@ -1364,6 +1364,12 @@
           tabs.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           currentAlgo = btn.dataset.algo;
+          const models = getProblemModelList(currentProblem, currentAlgo);
+          if (models && currentProblem !== 'custom') {
+            const bestModel = getBestTestModel(currentProblem, currentAlgo);
+            currentK = bestModel ? bestModel.k : 1;
+            renderKButtons(models.length);
+          }
           updateDashboard();
         });
       });
@@ -1414,7 +1420,7 @@
       const heroDescription = document.getElementById('heroDescription');
       const heroDatasetName = document.getElementById('heroDatasetName');
       const heroSweetPill = document.getElementById('heroSweetPill');
-      const heroCliffPill = document.getElementById('heroCliffPill');
+      const heroSplitPill = document.getElementById('heroSplitPill');
       const predictorTitle = document.getElementById('predictorTitle');
       const predOutputLabel = document.getElementById('predOutputLabel');
       const customConfigPanel = document.getElementById('customConfigPanel');
@@ -1422,33 +1428,30 @@
       if (problemKey === '50startups') {
         customConfigPanel.style.display = 'none';
         heroTitle.textContent = '50 Startups: Feature Selection & Parsimony Analysis';
-        heroDescription.innerHTML = 'Compare 5 Machine Learning Feature Selection Algorithms (<strong>Lasso</strong>, <strong>Forward SFS</strong>, <strong>RFE</strong>, <strong>ElasticNet</strong>, <strong>Exhaustive Search</strong>) against Baseline OLS. Explore the bias-variance tradeoff across feature counts $k=1 \\dots 5$, pinpointing the <strong>2-feature optimal sweet spot</strong> and the <strong>5-feature overfitting cliff</strong>.';
+        heroDescription.innerHTML = 'Compare five feature-selection methods ranked on the training split and evaluated on held-out data. The best predictor count is determined by test RMSE for the selected method.';
         heroDatasetName.textContent = '50 Startups Dataset (50 rows)';
-        heroSweetPill.innerHTML = '<i class="fa-solid fa-star" style="color: #34d399;"></i> Sweet Spot: k=2 ($8,198.80 RMSE)';
-        heroSweetPill.style.display = 'inline-flex';
-        heroCliffPill.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color: #fbbf24;"></i> Overfitting: k=5 ($9,137.99 RMSE)';
-        heroCliffPill.style.display = 'inline-flex';
         predictorTitle.textContent = 'Live Profit Predictor';
         predOutputLabel.textContent = 'Predicted Startup Profit';
 
-        currentK = 2; // Default optimal sweet spot
-        renderKButtons(5, 2, 5);
+        const models = getProblemModelList(problemKey, currentAlgo);
+        const bestModel = getBestTestModel(problemKey, currentAlgo);
+        currentK = bestModel ? bestModel.k : 1;
+        renderKButtons(models ? models.length : 5);
         renderPredictorInputs('50startups');
         updateDashboard();
 
       } else if (problemKey === 'boston') {
         customConfigPanel.style.display = 'none';
         heroTitle.textContent = 'Boston Housing: Multiple Linear Regression & Hedonic Pricing';
-        heroDescription.innerHTML = 'Explore hedonic home valuation across 13 socioeconomic, environmental, and structural features in Boston suburbs. Evaluate feature selection from $k=1 \\dots 13$ predictors (including <strong>LSTAT</strong>, <strong>RM</strong>, <strong>PTRATIO</strong>, <strong>DIS</strong>, <strong>TAX</strong>).';
+        heroDescription.innerHTML = 'Explore hedonic home valuation across 13 socioeconomic, environmental, and structural features. Predictors are selected using training data and evaluated on a held-out test set.';
         heroDatasetName.textContent = 'Boston Housing Dataset (506 rows, 13 features)';
-        heroSweetPill.innerHTML = '<i class="fa-solid fa-star" style="color: #34d399;"></i> Low Error: k=13 (4.68 RMSE)';
-        heroSweetPill.style.display = 'inline-flex';
-        heroCliffPill.style.display = 'none';
         predictorTitle.textContent = 'Live Boston Home Value Predictor';
         predOutputLabel.textContent = 'Predicted Median Value ($1000s)';
 
-        currentK = 3; // Default 3 key features (LSTAT, RM, PTRATIO)
-        renderKButtons(13, 13, null);
+        const models = getProblemModelList(problemKey, currentAlgo);
+        const bestModel = getBestTestModel(problemKey, currentAlgo);
+        currentK = bestModel ? bestModel.k : 1;
+        renderKButtons(models ? models.length : 13);
         renderPredictorInputs('boston');
         updateDashboard();
 
@@ -1458,13 +1461,13 @@
         heroDescription.innerHTML = 'Load arbitrary CSV data via public URL or local upload. Our in-browser matrix engine performs ordinary least squares (OLS) regression, calculates exact ANOVA metrics, $R^2$, RMSE, and diagnostic residuals in real-time.';
         heroDatasetName.textContent = customDataset ? `Custom CSV (${customDataset.rows.length} rows)` : 'No custom dataset loaded yet';
         heroSweetPill.style.display = 'none';
-        heroCliffPill.style.display = 'none';
+        heroSplitPill.style.display = 'none';
         predictorTitle.textContent = 'Live Model Predictor';
         predOutputLabel.textContent = 'Predicted Target Value';
 
         if (customDataset && customDataset.models) {
           const maxK = customDataset.features.length;
-          renderKButtons(maxK, null, null);
+          renderKButtons(maxK);
           renderPredictorInputs('custom');
           updateDashboard();
         } else {
@@ -1475,10 +1478,12 @@
     }
 
     // Render K buttons dynamically
-    function renderKButtons(totalK, sweetSpotK, overfittingK) {
+    function renderKButtons(totalK) {
       const group = document.getElementById('kSelectorGroup');
       group.innerHTML = '';
       document.getElementById('kRangeLabel').textContent = `k = 1 to ${totalK}`;
+      const models = getProblemModelList(currentProblem, currentAlgo);
+      const bestModel = getBestTestModel(currentProblem, currentAlgo);
 
       for (let k = 1; k <= totalK; k++) {
         const btn = document.createElement('button');
@@ -1488,22 +1493,11 @@
         if (k === currentK) btn.classList.add('active');
 
         let note = '';
-        if (currentProblem === '50startups') {
-          if (k === 1) note = '<span style="font-size: 11px; font-weight: 400;">(R&D Spend)</span>';
-          if (k === 2) {
-            btn.classList.add('sweet-spot');
-            note = '★ Optimal Sweet Spot <span style="font-size: 11px; font-weight: 700;">(Min RMSE)</span>';
-          }
-          if (k === 3) note = '<span style="font-size: 11px;">(+ State/Admin)</span>';
-          if (k === 5) {
-            btn.classList.add('overfitting');
-            note = '⚠ Full Model <span style="font-size: 11px; font-weight: 700;">(Overfitting Cliff)</span>';
-          }
-        } else if (currentProblem === 'boston') {
-          if (k === 1) note = '<span style="font-size: 11px;">(LSTAT)</span>';
-          if (k === 2) note = '<span style="font-size: 11px;">(LSTAT, RM)</span>';
-          if (k === 3) note = '<span style="font-size: 11px;">(+ PTRATIO)</span>';
-          if (k === 13) note = '★ Full Model (13 Features)';
+        if (bestModel && k === bestModel.k) {
+          btn.classList.add('sweet-spot');
+          note = '<span style="font-size: 11px; font-weight: 700;">Lowest test RMSE</span>';
+        } else if (models && models[k - 1]) {
+          note = `<span style="font-size: 11px;">(${models[k - 1].features.slice(0, 3).join(', ')})</span>`;
         }
 
         btn.innerHTML = `k = ${k} ${note}`;
@@ -1518,21 +1512,50 @@
       }
     }
 
-    // Retrieve active model data object
-    function getActiveModelData() {
+    function getProblemModelList(problemKey = currentProblem, algorithm = currentAlgo) {
       let problemData;
-      if (currentProblem === '50startups') {
-        problemData = window.PROBLEMS_DATA['50startups'];
-      } else if (currentProblem === 'boston') {
-        problemData = window.PROBLEMS_DATA['boston'];
-      } else if (currentProblem === 'custom' && customDataset && customDataset.models) {
-        problemData = customDataset.models;
-      }
-
+      if (problemKey === '50startups') problemData = window.PROBLEMS_DATA['50startups'];
+      else if (problemKey === 'boston') problemData = window.PROBLEMS_DATA['boston'];
+      else if (problemKey === 'custom' && customDataset && customDataset.models) problemData = customDataset.models;
       if (!problemData) return null;
 
-      const algo = currentAlgo === 'ALL' ? 'Lasso' : currentAlgo;
-      const list = problemData[algo] || problemData['Lasso'] || Object.values(problemData)[0];
+      const selectedAlgorithm = algorithm === 'ALL' ? 'Lasso' : algorithm;
+      return problemData[selectedAlgorithm] || problemData['Lasso'] || Object.values(problemData)[0] || null;
+    }
+
+    function getBestTestModel(problemKey = currentProblem, algorithm = currentAlgo) {
+      const models = getProblemModelList(problemKey, algorithm);
+      return models && models.length ? models.reduce((best, item) => item.rmse < best.rmse ? item : best) : null;
+    }
+
+    function updateModelSummary() {
+      const bestModel = getBestTestModel(currentProblem, currentAlgo);
+      const sweetPill = document.getElementById('heroSweetPill');
+      const splitPill = document.getElementById('heroSplitPill');
+      const trainingInfo = window.TRAINING_INFO;
+      const datasetInfo = trainingInfo && trainingInfo.datasets[currentProblem];
+
+      if (!bestModel || !datasetInfo) {
+        sweetPill.style.display = 'none';
+        splitPill.style.display = 'none';
+        return;
+      }
+
+      const isCurrency = currentProblem === '50startups';
+      const rmse = bestModel.rmse.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+      const summaryAlgorithm = currentAlgo === 'ALL' ? 'Lasso' : currentAlgo;
+      sweetPill.innerHTML = `<i class="fa-solid fa-star" style="color: #34d399;"></i> Best Test RMSE (${summaryAlgorithm}): k=${bestModel.k} (${isCurrency ? '$' : ''}${rmse})`;
+      sweetPill.style.display = 'inline-flex';
+      splitPill.innerHTML = `<i class="fa-solid fa-scale-balanced"></i> Train ${datasetInfo.train_rows} / Test ${datasetInfo.test_rows} · Seed ${trainingInfo.random_state}`;
+      splitPill.style.display = 'inline-flex';
+    }
+
+    // Retrieve active model data object
+    function getActiveModelData() {
+      const list = getProblemModelList();
       if (!list || list.length === 0) return null;
 
       const safeK = Math.min(Math.max(currentK, 1), list.length);
@@ -1543,6 +1566,7 @@
     function updateDashboard() {
       const data = getActiveModelData();
       if (!data) return;
+      updateModelSummary();
 
       const isCurrency = currentProblem === '50startups';
       const formatVal = (val, digits = 2) => {
@@ -1554,26 +1578,21 @@
       // 1. KPI Cards
       document.getElementById('valRMSE').textContent = formatVal(data.rmse);
       document.getElementById('valR2').textContent = data.r2.toFixed(4);
-      document.getElementById('valAdjR2').textContent = data.adj_r2 ? data.adj_r2.toFixed(4) : 'N/A';
+      document.getElementById('valAdjR2').textContent = Number.isFinite(data.adj_r2) ? data.adj_r2.toFixed(4) : 'N/A';
       document.getElementById('valMAE').textContent = formatVal(data.mae);
-      document.getElementById('valFStat').textContent = data.f_stat ? data.f_stat.toFixed(1) : '347.8';
-      document.getElementById('fStatPval').textContent = (data.f_pvalue && data.f_pvalue < 0.0001) ? 'p < 0.0001' : `p = ${data.f_pvalue ? data.f_pvalue.toFixed(4) : '0.0000'}`;
+      document.getElementById('valFStat').textContent = Number.isFinite(data.f_stat) ? data.f_stat.toFixed(1) : 'N/A';
+      document.getElementById('fStatPval').textContent = Number.isFinite(data.f_pvalue)
+        ? (data.f_pvalue < 0.0001 ? 'p < 0.0001' : `p = ${data.f_pvalue.toFixed(4)}`)
+        : 'p = N/A';
 
       // RMSE Badge
       const rmseBadge = document.getElementById('rmseBadge');
-      if (currentProblem === '50startups') {
-        if (currentK === 2) {
-          rmseBadge.className = 'badge-tag badge-green';
-          rmseBadge.innerHTML = '<i class="fa-solid fa-award"></i> Optimal Sweet Spot';
-        } else if (currentK === 5) {
-          rmseBadge.className = 'badge-tag badge-amber';
-          rmseBadge.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Overfitting Cliff';
-        } else {
-          rmseBadge.className = 'badge-tag badge-blue';
-          rmseBadge.innerHTML = `k = ${currentK}`;
-        }
-      } else {
+      const bestModel = getBestTestModel(currentProblem, currentAlgo);
+      if (bestModel && currentK === bestModel.k) {
         rmseBadge.className = 'badge-tag badge-green';
+        rmseBadge.innerHTML = '<i class="fa-solid fa-award"></i> Best Test RMSE';
+      } else {
+        rmseBadge.className = 'badge-tag badge-blue';
         rmseBadge.innerHTML = `k = ${currentK}`;
       }
 
@@ -1591,15 +1610,12 @@
       // 3. Parsimony Notice
       const notice = document.getElementById('parsimonyNotice');
       if (currentProblem === '50startups') {
-        if (currentK === 2) {
+        if (bestModel && currentK === bestModel.k) {
           notice.className = 'badge-tag badge-green';
-          notice.innerHTML = '<i class="fa-solid fa-star"></i> Occam\'s Razor: 2 features yield the minimum test RMSE ($8,198.80) and peak R² (0.9474).';
-        } else if (currentK === 5) {
-          notice.className = 'badge-tag badge-amber';
-          notice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Overfitting Warning: Adding Admin & Location dummies spikes error to $9,137.99!';
+          notice.innerHTML = `<i class="fa-solid fa-star"></i> Lowest held-out RMSE for ${currentAlgo === 'ALL' ? 'Lasso' : currentAlgo} among the tested feature counts.`;
         } else {
           notice.className = 'badge-tag badge-blue';
-          notice.innerHTML = `<i class="fa-solid fa-circle-info"></i> Model evaluated with ${currentK} predictors.`;
+          notice.innerHTML = `Held-out model evaluated with ${currentK} predictors.`;
         }
       } else if (currentProblem === 'boston') {
         notice.className = 'badge-tag badge-green';
@@ -1666,19 +1682,16 @@
       if (!list) return;
 
       const isCurrency = currentProblem === '50startups';
+      const bestModel = list.reduce((best, item) => item.rmse < best.rmse ? item : best);
 
       list.forEach(item => {
         const tr = document.createElement('tr');
         const isCurrent = item.k === currentK;
         if (isCurrent) tr.style.backgroundColor = '#f0fdf4';
 
-        let statusBadge = '<span class="badge-tag badge-blue">Evaluated</span>';
-        if (currentProblem === '50startups') {
-          if (item.k === 2) statusBadge = '<span class="badge-tag badge-green"><i class="fa-solid fa-award"></i> Optimal Sweet Spot</span>';
-          else if (item.k === 5) statusBadge = '<span class="badge-tag badge-amber"><i class="fa-solid fa-triangle-exclamation"></i> Overfitting Cliff</span>';
-        } else if (currentProblem === 'boston' && item.k === 13) {
-          statusBadge = '<span class="badge-tag badge-green"><i class="fa-solid fa-check"></i> Full Model</span>';
-        }
+        const statusBadge = item.k === bestModel.k
+          ? '<span class="badge-tag badge-green"><i class="fa-solid fa-award"></i> Best Test RMSE</span>'
+          : '<span class="badge-tag badge-blue">Evaluated</span>';
 
         const rmseFormatted = isCurrency 
           ? `$${item.rmse.toLocaleString('en-US', { minimumFractionDigits: 6, maximumFractionDigits: 6 })}`
@@ -1825,48 +1838,20 @@
         document.getElementById('selectState').addEventListener('change', calculateLivePrediction);
 
       } else if (problemType === 'boston') {
-        container.innerHTML = `
-          <div class="input-group">
+        const defaults = window.TRAINING_INFO?.datasets?.boston?.feature_defaults || {};
+        Object.entries(defaults).forEach(([feature, value]) => {
+          const group = document.createElement('div');
+          group.className = 'input-group';
+          group.innerHTML = `
             <div class="input-label-row">
-              <span>RM (Average Rooms per Dwelling)</span>
-              <span id="labelRM" style="color: var(--primary); font-family: 'Fira Code', monospace;">6.2</span>
+              <span>${feature}</span>
+              <span style="color: var(--primary); font-family: 'Fira Code', monospace;">${Number(value).toFixed(3)}</span>
             </div>
-            <input type="number" id="numRM" class="input-field" value="6.2" min="3" max="9" step="0.1">
-            <input type="range" id="rangeRM" class="range-slider" value="6.2" min="3" max="9" step="0.1">
-          </div>
-
-          <div class="input-group">
-            <div class="input-label-row">
-              <span>LSTAT (% Lower Status of Population)</span>
-              <span id="labelLSTAT" style="color: var(--primary); font-family: 'Fira Code', monospace;">12.5%</span>
-            </div>
-            <input type="number" id="numLSTAT" class="input-field" value="12.5" min="1" max="40" step="0.5">
-            <input type="range" id="rangeLSTAT" class="range-slider" value="12.5" min="1" max="40" step="0.5">
-          </div>
-
-          <div class="input-group">
-            <div class="input-label-row">
-              <span>PTRATIO (Pupil-Teacher Ratio by Town)</span>
-              <span id="labelPTRATIO" style="color: var(--slate-600); font-family: 'Fira Code', monospace;">18.5</span>
-            </div>
-            <input type="number" id="numPTRATIO" class="input-field" value="18.5" min="12" max="23" step="0.5">
-            <input type="range" id="rangePTRATIO" class="range-slider" value="18.5" min="12" max="23" step="0.5">
-          </div>
-
-          <div class="input-group">
-            <div class="input-label-row">
-              <span>CRIM (Per Capita Crime Rate)</span>
-              <span id="labelCRIM" style="color: var(--slate-600); font-family: 'Fira Code', monospace;">0.5</span>
-            </div>
-            <input type="number" id="numCRIM" class="input-field" value="0.5" min="0" max="90" step="0.5">
-            <input type="range" id="rangeCRIM" class="range-slider" value="0.5" min="0" max="90" step="0.5">
-          </div>
-        `;
-
-        syncInput('rangeRM', 'numRM', 'labelRM', '');
-        syncInput('rangeLSTAT', 'numLSTAT', 'labelLSTAT', '', '%');
-        syncInput('rangePTRATIO', 'numPTRATIO', 'labelPTRATIO', '');
-        syncInput('rangeCRIM', 'numCRIM', 'labelCRIM', '');
+            <input type="number" class="input-field boston-pred-input" data-feature="${feature}" value="${value}" step="any">
+          `;
+          group.querySelector('input').addEventListener('input', calculateLivePrediction);
+          container.appendChild(group);
+        });
 
       } else if (problemType === 'custom' && customDataset) {
         // Dynamically build inputs for active features
@@ -1946,26 +1931,18 @@
         document.getElementById('predFormulaNote').innerHTML = `Active predictors: ${data.features.join(', ')}<br><span style="font-size: 11px; color: #cbd5e1;">(${usedFeatures.join(' | ')})</span>`;
 
       } else if (currentProblem === 'boston') {
-        const rm = parseFloat(document.getElementById('numRM')?.value) || 6.2;
-        const lstat = parseFloat(document.getElementById('numLSTAT')?.value) || 12.5;
-        const ptratio = parseFloat(document.getElementById('numPTRATIO')?.value) || 18.5;
-        const crim = parseFloat(document.getElementById('numCRIM')?.value) || 0.5;
+        const defaults = window.TRAINING_INFO?.datasets?.boston?.feature_defaults || {};
 
         data.coefficients.forEach(c => {
           if (c.feature.includes('Intercept')) {
             pred += c.coef;
-          } else if (c.feature === 'RM') {
-            pred += c.coef * rm;
-            usedFeatures.push(`RM: ${(c.coef * rm >= 0 ? '+' : '')}${(c.coef * rm).toFixed(2)}`);
-          } else if (c.feature === 'LSTAT') {
-            pred += c.coef * lstat;
-            usedFeatures.push(`LSTAT: ${(c.coef * lstat >= 0 ? '+' : '')}${(c.coef * lstat).toFixed(2)}`);
-          } else if (c.feature === 'PTRATIO') {
-            pred += c.coef * ptratio;
-            usedFeatures.push(`PTRATIO: ${(c.coef * ptratio >= 0 ? '+' : '')}${(c.coef * ptratio).toFixed(2)}`);
-          } else if (c.feature === 'CRIM') {
-            pred += c.coef * crim;
-            usedFeatures.push(`CRIM: ${(c.coef * crim >= 0 ? '+' : '')}${(c.coef * crim).toFixed(2)}`);
+          } else {
+            const input = Array.from(document.querySelectorAll('.boston-pred-input'))
+              .find(item => item.dataset.feature === c.feature);
+            const value = input ? Number(input.value) : Number(defaults[c.feature] || 0);
+            const contribution = c.coef * value;
+            pred += contribution;
+            usedFeatures.push(`${c.feature}: ${contribution >= 0 ? '+' : ''}${contribution.toFixed(2)}`);
           }
         });
 
@@ -2098,8 +2075,12 @@
         const r2Points = algoData.map(item => item.r2);
         const color = ALGO_COLORS[algo] || '#4f46e5';
 
-        const pointRadii = algoData.map(item => item.k === currentK ? 7 : (currentProblem === '50startups' && item.k === 2 ? 6 : 4));
-        const pointColors = algoData.map(item => (currentProblem === '50startups' && item.k === 2) ? '#10b981' : color);
+        const bestRmseK = algoData.reduce((best, item) => item.rmse < best.rmse ? item : best).k;
+        const bestR2K = algoData.reduce((best, item) => item.r2 > best.r2 ? item : best).k;
+        const rmsePointRadii = algoData.map(item => item.k === currentK ? 7 : (item.k === bestRmseK ? 6 : 4));
+        const r2PointRadii = algoData.map(item => item.k === currentK ? 7 : (item.k === bestR2K ? 6 : 4));
+        const rmsePointColors = algoData.map(item => item.k === bestRmseK ? '#10b981' : color);
+        const r2PointColors = algoData.map(item => item.k === bestR2K ? '#10b981' : color);
 
         datasetsRMSE.push({
           label: algo,
@@ -2108,8 +2089,8 @@
           backgroundColor: color,
           borderWidth: isCompareAll ? 2 : 2.5,
           tension: 0.1,
-          pointRadius: pointRadii,
-          pointBackgroundColor: pointColors,
+          pointRadius: rmsePointRadii,
+          pointBackgroundColor: rmsePointColors,
           pointBorderColor: '#ffffff',
           pointBorderWidth: 2
         });
@@ -2121,8 +2102,8 @@
           backgroundColor: color,
           borderWidth: isCompareAll ? 2 : 2.5,
           tension: 0.1,
-          pointRadius: pointRadii,
-          pointBackgroundColor: pointColors,
+          pointRadius: r2PointRadii,
+          pointBackgroundColor: r2PointColors,
           pointBorderColor: '#ffffff',
           pointBorderWidth: 2
         });

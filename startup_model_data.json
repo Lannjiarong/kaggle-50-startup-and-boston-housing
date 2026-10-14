@@ -1,0 +1,3712 @@
+{
+  "Lasso": [
+    {
+      "k": 1,
+      "features": [
+        "R&D Spend"
+      ],
+      "rmse": 7714.334890830191,
+      "mae": 6077.363300620414,
+      "r2": 0.926510810934195,
+      "adj_r2": 0.9173246623009693,
+      "f_stat": 676.1034669260158,
+      "f_pvalue": 8.220226885843815e-26,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 49336.668037991134,
+          "stderr": 2985.8187403673196,
+          "tstat": 16.523664806230556,
+          "pvalue": 6.146014093294155e-19,
+          "ci_lower": 43292.19400549254,
+          "ci_upper": 55381.142070489725,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8536091075148805,
+          "stderr": 0.032828607283217764,
+          "tstat": 26.00198967171087,
+          "pvalue": 8.220226894222919e-26,
+          "ci_lower": 0.7871510665213765,
+          "ci_upper": 0.9200671485083846,
+          "vif": 1.0
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 50190.47,
+          "residual": 14735.61,
+          "abs_error": 14735.61,
+          "pct_error": 22.7
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 49799.37,
+          "residual": -14125.96,
+          "abs_error": 14125.96,
+          "pct_error": 39.6
+        },
+        {
+          "rank": 3,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 113638.08,
+          "residual": -7904.54,
+          "abs_error": 7904.54,
+          "pct_error": 7.48
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 127862.21,
+          "residual": 6445.14,
+          "abs_error": 6445.14,
+          "pct_error": 4.8
+        },
+        {
+          "rank": 5,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 103463.05,
+          "residual": -6035.21,
+          "abs_error": 6035.21,
+          "pct_error": 6.19
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 130136.88,
+          "residual": -4766.51,
+          "abs_error": 4766.51,
+          "pct_error": 3.8
+        },
+        {
+          "rank": 7,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 104535.05,
+          "residual": 2869.29,
+          "abs_error": 2869.29,
+          "pct_error": 2.67
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 102255.72,
+          "residual": -2318.13,
+          "abs_error": 2318.13,
+          "pct_error": 2.32
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 82250.56,
+          "residual": -1244.8,
+          "abs_error": 1244.8,
+          "pct_error": 1.54
+        },
+        {
+          "rank": 10,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 123105.31,
+          "residual": -328.45,
+          "abs_error": 328.45,
+          "pct_error": 0.27
+        }
+      ]
+    },
+    {
+      "k": 2,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend"
+      ],
+      "rmse": 8206.328813165846,
+      "mae": 6469.181721468587,
+      "r2": 0.9168381183550248,
+      "adj_r2": 0.8930775807421748,
+      "f_stat": 365.97812901160347,
+      "f_pvalue": 4.19325848499459e-25,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 45542.39247751433,
+          "stderr": 3457.2769577270465,
+          "tstat": 13.172908342135175,
+          "pvalue": 1.531530019003237e-15,
+          "ci_lower": 38537.28396316358,
+          "ci_upper": 52547.50099186508,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.7833743148902913,
+          "stderr": 0.047535123344667335,
+          "tstat": 16.479904958070822,
+          "pvalue": 1.2571105454840534e-18,
+          "ci_lower": 0.6870590062401672,
+          "ci_upper": 0.8796896235404154,
+          "vif": 2.26
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.039239787145531474,
+          "stderr": 0.01982183326747554,
+          "tstat": 1.97962451888432,
+          "pvalue": 0.05522150413968163,
+          "ci_lower": -0.0009230620244471271,
+          "ci_upper": 0.07940263631551008,
+          "vif": 2.26
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46400.66,
+          "residual": 18525.42,
+          "abs_error": 18525.42,
+          "pct_error": 28.53
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 45967.02,
+          "residual": -10293.61,
+          "abs_error": 10293.61,
+          "pct_error": 28.86
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113241.37,
+          "residual": 9535.49,
+          "abs_error": 9535.49,
+          "pct_error": 7.77
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 127521.39,
+          "residual": 6785.96,
+          "abs_error": 6785.96,
+          "pct_error": 5.05
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 101612.69,
+          "residual": 5791.65,
+          "abs_error": 5791.65,
+          "pct_error": 5.39
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 130782.54,
+          "residual": -5412.17,
+          "abs_error": 5412.17,
+          "pct_error": 4.32
+        },
+        {
+          "rank": 7,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109813.19,
+          "residual": -4079.65,
+          "abs_error": 4079.65,
+          "pct_error": 3.86
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 97683.25,
+          "residual": 2254.34,
+          "abs_error": 2254.34,
+          "pct_error": 2.26
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 82615.07,
+          "residual": -1609.31,
+          "abs_error": 1609.31,
+          "pct_error": 1.99
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97023.64,
+          "residual": 404.2,
+          "abs_error": 404.2,
+          "pct_error": 0.41
+        }
+      ]
+    },
+    {
+      "k": 3,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration"
+      ],
+      "rmse": 8995.90580336142,
+      "mae": 6979.152252370417,
+      "r2": 0.900065308303732,
+      "adj_r2": 0.850097962455598,
+      "f_stat": 246.58042982881324,
+      "f_pvalue": 4.761593318116774e-24,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54071.87574599091,
+          "stderr": 8166.659963193355,
+          "tstat": 6.621051444493784,
+          "pvalue": 1.0366754198999402e-07,
+          "ci_lower": 37509.12166659124,
+          "ci_upper": 70634.62982539058,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8037792756297518,
+          "stderr": 0.05053425023306851,
+          "tstat": 15.905633741920568,
+          "pvalue": 7.338837253380498e-18,
+          "ci_lower": 0.7012910658880207,
+          "ci_upper": 0.9062674853714829,
+          "vif": 2.57
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.031241545897733262,
+          "stderr": 0.020921171921393863,
+          "tstat": 1.4932980817286745,
+          "pvalue": 0.14407259574973222,
+          "ci_lower": -0.011188557369526269,
+          "ci_upper": 0.07367164916499279,
+          "vif": 2.54
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06792917400150003,
+          "stderr": 0.058980242074043725,
+          "tstat": -1.1517276228914393,
+          "pvalue": 0.25702465096095795,
+          "ci_lower": -0.18754664912824287,
+          "ci_upper": 0.051688301125242794,
+          "vif": 1.15
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46501.71,
+          "residual": 18424.37,
+          "abs_error": 18424.37,
+          "pct_error": 28.38
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50992.69,
+          "residual": -15319.28,
+          "abs_error": 15319.28,
+          "pct_error": 42.94
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113106.15,
+          "residual": 9670.71,
+          "abs_error": 9670.71,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126703.03,
+          "residual": 7604.32,
+          "abs_error": 7604.32,
+          "pct_error": 5.66
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100878.46,
+          "residual": 6525.88,
+          "abs_error": 6525.88,
+          "pct_error": 6.08
+        },
+        {
+          "rank": 6,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84894.75,
+          "residual": -3888.99,
+          "abs_error": 3888.99,
+          "pct_error": 4.8
+        },
+        {
+          "rank": 7,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 129128.4,
+          "residual": -3758.03,
+          "abs_error": 3758.03,
+          "pct_error": 3.0
+        },
+        {
+          "rank": 8,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109016.55,
+          "residual": -3283.01,
+          "abs_error": 3283.01,
+          "pct_error": 3.1
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 98893.42,
+          "residual": 1044.17,
+          "abs_error": 1044.17,
+          "pct_error": 1.04
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97700.6,
+          "residual": -272.76,
+          "abs_error": 272.76,
+          "pct_error": 0.28
+        }
+      ]
+    },
+    {
+      "k": 4,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration",
+        "State_Florida"
+      ],
+      "rmse": 9055.957751980784,
+      "mae": 6961.4868454714,
+      "r2": 0.8987266318484777,
+      "adj_r2": 0.8177079373272598,
+      "f_stat": 180.2430251126897,
+      "f_pvalue": 7.853484479981325e-23,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54029.88591914206,
+          "stderr": 8274.04324949254,
+          "tstat": 6.530046349764463,
+          "pvalue": 1.5570611505025902e-07,
+          "ci_lower": 37232.68511966102,
+          "ci_upper": 70827.0867186231,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056328218977676,
+          "stderr": 0.051595562534085135,
+          "tstat": 15.614381980340834,
+          "pvalue": 2.413164896610224e-17,
+          "ci_lower": 0.7008882613347851,
+          "ci_upper": 0.9103773824607502,
+          "vif": 2.61
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.02985972351662242,
+          "stderr": 0.021731713819147763,
+          "tstat": 1.3740160470138847,
+          "pvalue": 0.17817276480207192,
+          "ci_lower": -0.014258001002096992,
+          "ci_upper": 0.07397744803534183,
+          "vif": 2.67
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878374611887916,
+          "stderr": 0.05982042638465329,
+          "tstat": -1.1498371087593147,
+          "pvalue": 0.25800739948881984,
+          "ci_lower": -0.1902256679936798,
+          "ci_upper": 0.05265817575592148,
+          "vif": 1.15
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 935.0793356301194,
+          "stderr": 3254.2109708154194,
+          "tstat": 0.2873444112923672,
+          "pvalue": 0.7755430897332983,
+          "ci_lower": -5671.320156421509,
+          "ci_upper": 7541.478827681747,
+          "vif": 1.06
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46352.84,
+          "residual": 18573.24,
+          "abs_error": 18573.24,
+          "pct_error": 28.61
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50907.49,
+          "residual": -15234.08,
+          "abs_error": 15234.08,
+          "pct_error": 42.7
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113093.16,
+          "residual": 9683.7,
+          "abs_error": 9683.7,
+          "pct_error": 7.89
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126366.62,
+          "residual": 7940.73,
+          "abs_error": 7940.73,
+          "pct_error": 5.91
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100646.44,
+          "residual": 6757.9,
+          "abs_error": 6757.9,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109740.86,
+          "residual": -4007.32,
+          "abs_error": 4007.32,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84611.5,
+          "residual": -3605.74,
+          "abs_error": 3605.74,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128747.41,
+          "residual": -3377.04,
+          "abs_error": 3377.04,
+          "pct_error": 2.69
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99676.67,
+          "residual": 260.92,
+          "abs_error": 260.92,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97602.03,
+          "residual": -174.19,
+          "abs_error": 174.19,
+          "pct_error": 0.18
+        }
+      ]
+    },
+    {
+      "k": 5,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration",
+        "State_Florida",
+        "State_New York"
+      ],
+      "rmse": 9055.957323204308,
+      "mae": 6961.477813004758,
+      "r2": 0.8987266414385483,
+      "adj_r2": 0.7721349432367337,
+      "f_stat": 140.0745935075578,
+      "f_pvalue": 1.1313289000735549e-21,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54028.03959405867,
+          "stderr": 8457.293261792433,
+          "tstat": 6.388337015359451,
+          "pvalue": 2.7088902416355763e-07,
+          "ci_lower": 36840.75179909126,
+          "ci_upper": 71215.32738902608,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056300637569412,
+          "stderr": 0.052371248760988434,
+          "tstat": 15.383060034212102,
+          "pvalue": 6.997778772961148e-17,
+          "ci_lower": 0.6991988810163101,
+          "ci_upper": 0.9120612464975724,
+          "vif": 2.62
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.029855442910386703,
+          "stderr": 0.022176901353311698,
+          "tstat": 1.3462405064956633,
+          "pvalue": 0.18713248447738168,
+          "ci_lower": -0.015213443098561676,
+          "ci_upper": 0.07492432891933508,
+          "vif": 2.7
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878788228413206,
+          "stderr": 0.06073725886344327,
+          "tstat": -1.1325483495853699,
+          "pvalue": 0.2653279926519069,
+          "ci_lower": -0.19222084312037357,
+          "ci_upper": 0.05464507855210947,
+          "vif": 1.16
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 938.7930061484358,
+          "stderr": 3893.510884641537,
+          "tstat": 0.24111734472134844,
+          "pvalue": 0.8109123470749936,
+          "ci_lower": -6973.7731111331,
+          "ci_upper": 8851.359123429971,
+          "vif": 1.47
+        },
+        {
+          "feature": "State_New York",
+          "coef": 6.9877599669873005,
+          "stderr": 3882.7648770368705,
+          "tstat": 0.0017996866120618678,
+          "pvalue": 0.9985745767960756,
+          "ci_lower": -7883.73984236288,
+          "ci_upper": 7897.715362296854,
+          "vif": 1.41
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46357.46,
+          "residual": 18568.62,
+          "abs_error": 18568.62,
+          "pct_error": 28.6
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50912.42,
+          "residual": -15239.01,
+          "abs_error": 15239.01,
+          "pct_error": 42.72
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113097.43,
+          "residual": 9679.43,
+          "abs_error": 9679.43,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126362.88,
+          "residual": 7944.47,
+          "abs_error": 7944.47,
+          "pct_error": 5.92
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100643.24,
+          "residual": 6761.1,
+          "abs_error": 6761.1,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109741.35,
+          "residual": -4007.81,
+          "abs_error": 4007.81,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84608.45,
+          "residual": -3602.69,
+          "abs_error": 3602.69,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128750.48,
+          "residual": -3380.11,
+          "abs_error": 3380.11,
+          "pct_error": 2.7
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99677.49,
+          "residual": 260.1,
+          "abs_error": 260.1,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97599.28,
+          "residual": -171.44,
+          "abs_error": 171.44,
+          "pct_error": 0.18
+        }
+      ]
+    }
+  ],
+  "Forward SFS": [
+    {
+      "k": 1,
+      "features": [
+        "R&D Spend"
+      ],
+      "rmse": 7714.334890830191,
+      "mae": 6077.363300620414,
+      "r2": 0.926510810934195,
+      "adj_r2": 0.9173246623009693,
+      "f_stat": 676.1034669260158,
+      "f_pvalue": 8.220226885843815e-26,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 49336.668037991134,
+          "stderr": 2985.8187403673196,
+          "tstat": 16.523664806230556,
+          "pvalue": 6.146014093294155e-19,
+          "ci_lower": 43292.19400549254,
+          "ci_upper": 55381.142070489725,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8536091075148805,
+          "stderr": 0.032828607283217764,
+          "tstat": 26.00198967171087,
+          "pvalue": 8.220226894222919e-26,
+          "ci_lower": 0.7871510665213765,
+          "ci_upper": 0.9200671485083846,
+          "vif": 1.0
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 50190.47,
+          "residual": 14735.61,
+          "abs_error": 14735.61,
+          "pct_error": 22.7
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 49799.37,
+          "residual": -14125.96,
+          "abs_error": 14125.96,
+          "pct_error": 39.6
+        },
+        {
+          "rank": 3,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 113638.08,
+          "residual": -7904.54,
+          "abs_error": 7904.54,
+          "pct_error": 7.48
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 127862.21,
+          "residual": 6445.14,
+          "abs_error": 6445.14,
+          "pct_error": 4.8
+        },
+        {
+          "rank": 5,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 103463.05,
+          "residual": -6035.21,
+          "abs_error": 6035.21,
+          "pct_error": 6.19
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 130136.88,
+          "residual": -4766.51,
+          "abs_error": 4766.51,
+          "pct_error": 3.8
+        },
+        {
+          "rank": 7,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 104535.05,
+          "residual": 2869.29,
+          "abs_error": 2869.29,
+          "pct_error": 2.67
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 102255.72,
+          "residual": -2318.13,
+          "abs_error": 2318.13,
+          "pct_error": 2.32
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 82250.56,
+          "residual": -1244.8,
+          "abs_error": 1244.8,
+          "pct_error": 1.54
+        },
+        {
+          "rank": 10,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 123105.31,
+          "residual": -328.45,
+          "abs_error": 328.45,
+          "pct_error": 0.27
+        }
+      ]
+    },
+    {
+      "k": 2,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend"
+      ],
+      "rmse": 8206.328813165846,
+      "mae": 6469.181721468587,
+      "r2": 0.9168381183550248,
+      "adj_r2": 0.8930775807421748,
+      "f_stat": 365.97812901160347,
+      "f_pvalue": 4.19325848499459e-25,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 45542.39247751433,
+          "stderr": 3457.2769577270465,
+          "tstat": 13.172908342135175,
+          "pvalue": 1.531530019003237e-15,
+          "ci_lower": 38537.28396316358,
+          "ci_upper": 52547.50099186508,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.7833743148902913,
+          "stderr": 0.047535123344667335,
+          "tstat": 16.479904958070822,
+          "pvalue": 1.2571105454840534e-18,
+          "ci_lower": 0.6870590062401672,
+          "ci_upper": 0.8796896235404154,
+          "vif": 2.26
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.039239787145531474,
+          "stderr": 0.01982183326747554,
+          "tstat": 1.97962451888432,
+          "pvalue": 0.05522150413968163,
+          "ci_lower": -0.0009230620244471271,
+          "ci_upper": 0.07940263631551008,
+          "vif": 2.26
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46400.66,
+          "residual": 18525.42,
+          "abs_error": 18525.42,
+          "pct_error": 28.53
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 45967.02,
+          "residual": -10293.61,
+          "abs_error": 10293.61,
+          "pct_error": 28.86
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113241.37,
+          "residual": 9535.49,
+          "abs_error": 9535.49,
+          "pct_error": 7.77
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 127521.39,
+          "residual": 6785.96,
+          "abs_error": 6785.96,
+          "pct_error": 5.05
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 101612.69,
+          "residual": 5791.65,
+          "abs_error": 5791.65,
+          "pct_error": 5.39
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 130782.54,
+          "residual": -5412.17,
+          "abs_error": 5412.17,
+          "pct_error": 4.32
+        },
+        {
+          "rank": 7,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109813.19,
+          "residual": -4079.65,
+          "abs_error": 4079.65,
+          "pct_error": 3.86
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 97683.25,
+          "residual": 2254.34,
+          "abs_error": 2254.34,
+          "pct_error": 2.26
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 82615.07,
+          "residual": -1609.31,
+          "abs_error": 1609.31,
+          "pct_error": 1.99
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97023.64,
+          "residual": 404.2,
+          "abs_error": 404.2,
+          "pct_error": 0.41
+        }
+      ]
+    },
+    {
+      "k": 3,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration"
+      ],
+      "rmse": 8995.90580336142,
+      "mae": 6979.152252370417,
+      "r2": 0.900065308303732,
+      "adj_r2": 0.850097962455598,
+      "f_stat": 246.58042982881324,
+      "f_pvalue": 4.761593318116774e-24,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54071.87574599091,
+          "stderr": 8166.659963193355,
+          "tstat": 6.621051444493784,
+          "pvalue": 1.0366754198999402e-07,
+          "ci_lower": 37509.12166659124,
+          "ci_upper": 70634.62982539058,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8037792756297518,
+          "stderr": 0.05053425023306851,
+          "tstat": 15.905633741920568,
+          "pvalue": 7.338837253380498e-18,
+          "ci_lower": 0.7012910658880207,
+          "ci_upper": 0.9062674853714829,
+          "vif": 2.57
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.031241545897733262,
+          "stderr": 0.020921171921393863,
+          "tstat": 1.4932980817286745,
+          "pvalue": 0.14407259574973222,
+          "ci_lower": -0.011188557369526269,
+          "ci_upper": 0.07367164916499279,
+          "vif": 2.54
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06792917400150003,
+          "stderr": 0.058980242074043725,
+          "tstat": -1.1517276228914393,
+          "pvalue": 0.25702465096095795,
+          "ci_lower": -0.18754664912824287,
+          "ci_upper": 0.051688301125242794,
+          "vif": 1.15
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46501.71,
+          "residual": 18424.37,
+          "abs_error": 18424.37,
+          "pct_error": 28.38
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50992.69,
+          "residual": -15319.28,
+          "abs_error": 15319.28,
+          "pct_error": 42.94
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113106.15,
+          "residual": 9670.71,
+          "abs_error": 9670.71,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126703.03,
+          "residual": 7604.32,
+          "abs_error": 7604.32,
+          "pct_error": 5.66
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100878.46,
+          "residual": 6525.88,
+          "abs_error": 6525.88,
+          "pct_error": 6.08
+        },
+        {
+          "rank": 6,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84894.75,
+          "residual": -3888.99,
+          "abs_error": 3888.99,
+          "pct_error": 4.8
+        },
+        {
+          "rank": 7,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 129128.4,
+          "residual": -3758.03,
+          "abs_error": 3758.03,
+          "pct_error": 3.0
+        },
+        {
+          "rank": 8,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109016.55,
+          "residual": -3283.01,
+          "abs_error": 3283.01,
+          "pct_error": 3.1
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 98893.42,
+          "residual": 1044.17,
+          "abs_error": 1044.17,
+          "pct_error": 1.04
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97700.6,
+          "residual": -272.76,
+          "abs_error": 272.76,
+          "pct_error": 0.28
+        }
+      ]
+    },
+    {
+      "k": 4,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration",
+        "State_Florida"
+      ],
+      "rmse": 9055.957751980784,
+      "mae": 6961.4868454714,
+      "r2": 0.8987266318484777,
+      "adj_r2": 0.8177079373272598,
+      "f_stat": 180.2430251126897,
+      "f_pvalue": 7.853484479981325e-23,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54029.88591914206,
+          "stderr": 8274.04324949254,
+          "tstat": 6.530046349764463,
+          "pvalue": 1.5570611505025902e-07,
+          "ci_lower": 37232.68511966102,
+          "ci_upper": 70827.0867186231,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056328218977676,
+          "stderr": 0.051595562534085135,
+          "tstat": 15.614381980340834,
+          "pvalue": 2.413164896610224e-17,
+          "ci_lower": 0.7008882613347851,
+          "ci_upper": 0.9103773824607502,
+          "vif": 2.61
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.02985972351662242,
+          "stderr": 0.021731713819147763,
+          "tstat": 1.3740160470138847,
+          "pvalue": 0.17817276480207192,
+          "ci_lower": -0.014258001002096992,
+          "ci_upper": 0.07397744803534183,
+          "vif": 2.67
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878374611887916,
+          "stderr": 0.05982042638465329,
+          "tstat": -1.1498371087593147,
+          "pvalue": 0.25800739948881984,
+          "ci_lower": -0.1902256679936798,
+          "ci_upper": 0.05265817575592148,
+          "vif": 1.15
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 935.0793356301194,
+          "stderr": 3254.2109708154194,
+          "tstat": 0.2873444112923672,
+          "pvalue": 0.7755430897332983,
+          "ci_lower": -5671.320156421509,
+          "ci_upper": 7541.478827681747,
+          "vif": 1.06
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46352.84,
+          "residual": 18573.24,
+          "abs_error": 18573.24,
+          "pct_error": 28.61
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50907.49,
+          "residual": -15234.08,
+          "abs_error": 15234.08,
+          "pct_error": 42.7
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113093.16,
+          "residual": 9683.7,
+          "abs_error": 9683.7,
+          "pct_error": 7.89
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126366.62,
+          "residual": 7940.73,
+          "abs_error": 7940.73,
+          "pct_error": 5.91
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100646.44,
+          "residual": 6757.9,
+          "abs_error": 6757.9,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109740.86,
+          "residual": -4007.32,
+          "abs_error": 4007.32,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84611.5,
+          "residual": -3605.74,
+          "abs_error": 3605.74,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128747.41,
+          "residual": -3377.04,
+          "abs_error": 3377.04,
+          "pct_error": 2.69
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99676.67,
+          "residual": 260.92,
+          "abs_error": 260.92,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97602.03,
+          "residual": -174.19,
+          "abs_error": 174.19,
+          "pct_error": 0.18
+        }
+      ]
+    },
+    {
+      "k": 5,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration",
+        "State_Florida",
+        "State_New York"
+      ],
+      "rmse": 9055.957323204308,
+      "mae": 6961.477813004758,
+      "r2": 0.8987266414385483,
+      "adj_r2": 0.7721349432367337,
+      "f_stat": 140.0745935075578,
+      "f_pvalue": 1.1313289000735549e-21,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54028.03959405867,
+          "stderr": 8457.293261792433,
+          "tstat": 6.388337015359451,
+          "pvalue": 2.7088902416355763e-07,
+          "ci_lower": 36840.75179909126,
+          "ci_upper": 71215.32738902608,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056300637569412,
+          "stderr": 0.052371248760988434,
+          "tstat": 15.383060034212102,
+          "pvalue": 6.997778772961148e-17,
+          "ci_lower": 0.6991988810163101,
+          "ci_upper": 0.9120612464975724,
+          "vif": 2.62
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.029855442910386703,
+          "stderr": 0.022176901353311698,
+          "tstat": 1.3462405064956633,
+          "pvalue": 0.18713248447738168,
+          "ci_lower": -0.015213443098561676,
+          "ci_upper": 0.07492432891933508,
+          "vif": 2.7
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878788228413206,
+          "stderr": 0.06073725886344327,
+          "tstat": -1.1325483495853699,
+          "pvalue": 0.2653279926519069,
+          "ci_lower": -0.19222084312037357,
+          "ci_upper": 0.05464507855210947,
+          "vif": 1.16
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 938.7930061484358,
+          "stderr": 3893.510884641537,
+          "tstat": 0.24111734472134844,
+          "pvalue": 0.8109123470749936,
+          "ci_lower": -6973.7731111331,
+          "ci_upper": 8851.359123429971,
+          "vif": 1.47
+        },
+        {
+          "feature": "State_New York",
+          "coef": 6.9877599669873005,
+          "stderr": 3882.7648770368705,
+          "tstat": 0.0017996866120618678,
+          "pvalue": 0.9985745767960756,
+          "ci_lower": -7883.73984236288,
+          "ci_upper": 7897.715362296854,
+          "vif": 1.41
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46357.46,
+          "residual": 18568.62,
+          "abs_error": 18568.62,
+          "pct_error": 28.6
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50912.42,
+          "residual": -15239.01,
+          "abs_error": 15239.01,
+          "pct_error": 42.72
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113097.43,
+          "residual": 9679.43,
+          "abs_error": 9679.43,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126362.88,
+          "residual": 7944.47,
+          "abs_error": 7944.47,
+          "pct_error": 5.92
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100643.24,
+          "residual": 6761.1,
+          "abs_error": 6761.1,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109741.35,
+          "residual": -4007.81,
+          "abs_error": 4007.81,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84608.45,
+          "residual": -3602.69,
+          "abs_error": 3602.69,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128750.48,
+          "residual": -3380.11,
+          "abs_error": 3380.11,
+          "pct_error": 2.7
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99677.49,
+          "residual": 260.1,
+          "abs_error": 260.1,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97599.28,
+          "residual": -171.44,
+          "abs_error": 171.44,
+          "pct_error": 0.18
+        }
+      ]
+    }
+  ],
+  "RFE": [
+    {
+      "k": 1,
+      "features": [
+        "State_New York"
+      ],
+      "rmse": 35552.15912209313,
+      "mae": 24085.801259259264,
+      "r2": -0.5608401950303388,
+      "adj_r2": -0.7559452194091312,
+      "f_stat": 0.423846555421154,
+      "f_pvalue": 0.5189416274753226,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 112627.99814814815,
+          "stderr": 8146.965942818391,
+          "tstat": 13.824532830830174,
+          "pvalue": 2.0951257980954993e-16,
+          "ci_lower": 96135.32783991702,
+          "ci_upper": 129120.66845637928,
+          "vif": null
+        },
+        {
+          "feature": "State_New York",
+          "coef": 9303.761082621088,
+          "stderr": 14290.723626340245,
+          "tstat": 0.6510349878625227,
+          "pvalue": 0.5189416274753221,
+          "ci_lower": -19626.296424621,
+          "ci_upper": 38233.81858986318,
+          "vif": 1.0
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 121931.76,
+          "residual": -86258.35,
+          "abs_error": 86258.35,
+          "pct_error": 241.8
+        },
+        {
+          "rank": 2,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 121931.76,
+          "residual": -57005.68,
+          "abs_error": 57005.68,
+          "pct_error": 87.8
+        },
+        {
+          "rank": 3,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 112628.0,
+          "residual": -31622.24,
+          "abs_error": 31622.24,
+          "pct_error": 39.04
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 112628.0,
+          "residual": 21679.35,
+          "abs_error": 21679.35,
+          "pct_error": 16.14
+        },
+        {
+          "rank": 5,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 112628.0,
+          "residual": -15200.16,
+          "abs_error": 15200.16,
+          "pct_error": 15.6
+        },
+        {
+          "rank": 6,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 112628.0,
+          "residual": -12690.41,
+          "abs_error": 12690.41,
+          "pct_error": 12.7
+        },
+        {
+          "rank": 7,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 112628.0,
+          "residual": -6894.46,
+          "abs_error": 6894.46,
+          "pct_error": 6.52
+        },
+        {
+          "rank": 8,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 112628.0,
+          "residual": -5223.66,
+          "abs_error": 5223.66,
+          "pct_error": 4.86
+        },
+        {
+          "rank": 9,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 121931.76,
+          "residual": 3438.61,
+          "abs_error": 3438.61,
+          "pct_error": 2.74
+        },
+        {
+          "rank": 10,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 121931.76,
+          "residual": 845.1,
+          "abs_error": 845.1,
+          "pct_error": 0.69
+        }
+      ]
+    },
+    {
+      "k": 2,
+      "features": [
+        "State_Florida",
+        "State_New York"
+      ],
+      "rmse": 35902.08192702271,
+      "mae": 24725.659428571427,
+      "r2": -0.5917166005474774,
+      "adj_r2": -1.046492772132471,
+      "f_stat": 0.7907136708505664,
+      "f_pvalue": 0.46103459978917916,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 103557.13,
+          "stderr": 11717.025662092767,
+          "tstat": 8.838175573433348,
+          "pvalue": 1.1881756687065093e-10,
+          "ci_lower": 79816.18091434898,
+          "ci_upper": 127298.07908565103,
+          "vif": null
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 17493.81714285713,
+          "stderr": 16271.786801274406,
+          "tstat": 1.0751011770561678,
+          "pvalue": 0.2892904671613996,
+          "ci_lower": -15475.954633901609,
+          "ci_upper": 50463.58891961587,
+          "vif": 1.35
+        },
+        {
+          "feature": "State_New York",
+          "coef": 18374.629230769202,
+          "stderr": 16570.376602005188,
+          "tstat": 1.108884225874847,
+          "pvalue": 0.27463599195175364,
+          "ci_lower": -15200.14294976761,
+          "ci_upper": 51949.40141130601,
+          "vif": 1.35
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 121931.76,
+          "residual": -86258.35,
+          "abs_error": 86258.35,
+          "pct_error": 241.8
+        },
+        {
+          "rank": 2,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 121931.76,
+          "residual": -57005.68,
+          "abs_error": 57005.68,
+          "pct_error": 87.8
+        },
+        {
+          "rank": 3,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 103557.13,
+          "residual": 30750.22,
+          "abs_error": 30750.22,
+          "pct_error": 22.9
+        },
+        {
+          "rank": 4,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 103557.13,
+          "residual": -22551.37,
+          "abs_error": 22551.37,
+          "pct_error": 27.84
+        },
+        {
+          "rank": 5,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 121050.95,
+          "residual": -21113.36,
+          "abs_error": 21113.36,
+          "pct_error": 21.13
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 121050.95,
+          "residual": -15317.41,
+          "abs_error": 15317.41,
+          "pct_error": 14.49
+        },
+        {
+          "rank": 7,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 103557.13,
+          "residual": -6129.29,
+          "abs_error": 6129.29,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 8,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 103557.13,
+          "residual": 3847.21,
+          "abs_error": 3847.21,
+          "pct_error": 3.58
+        },
+        {
+          "rank": 9,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 121931.76,
+          "residual": 3438.61,
+          "abs_error": 3438.61,
+          "pct_error": 2.74
+        },
+        {
+          "rank": 10,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 121931.76,
+          "residual": 845.1,
+          "abs_error": 845.1,
+          "pct_error": 0.69
+        }
+      ]
+    },
+    {
+      "k": 3,
+      "features": [
+        "R&D Spend",
+        "State_Florida",
+        "State_New York"
+      ],
+      "rmse": 7946.3722436628295,
+      "mae": 6296.783546004742,
+      "r2": 0.9220234009619205,
+      "adj_r2": 0.8830351014428808,
+      "f_stat": 216.03481752102516,
+      "f_pvalue": 4.561537818880818e-23,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 48518.7969550359,
+          "stderr": 3553.5902378279766,
+          "tstat": 13.65345853288125,
+          "pvalue": 8.343669211627235e-16,
+          "ci_lower": 41311.78191175429,
+          "ci_upper": 55725.811998317506,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8512203090470098,
+          "stderr": 0.03418408083961217,
+          "tstat": 24.90107348624756,
+          "pvalue": 2.7592220407478503e-24,
+          "ci_lower": 0.7818917797671616,
+          "ci_upper": 0.9205488383268581,
+          "vif": 1.04
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 2351.4124350695924,
+          "stderr": 3911.7869139773484,
+          "tstat": 0.6011095406724929,
+          "pvalue": 0.5515334632914998,
+          "ci_lower": -5582.0591382816965,
+          "ci_upper": 10284.88400842088,
+          "vif": 1.38
+        },
+        {
+          "feature": "State_New York",
+          "coef": 555.2533430234517,
+          "stderr": 3999.6786041836353,
+          "tstat": 0.13882449015844942,
+          "pvalue": 0.8903625304882825,
+          "ci_lower": -7556.47083997124,
+          "ci_upper": 8666.977526018143,
+          "vif": 1.39
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 49925.47,
+          "residual": 15000.61,
+          "abs_error": 15000.61,
+          "pct_error": 23.1
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 49535.45,
+          "residual": -13862.04,
+          "abs_error": 13862.04,
+          "pct_error": 38.86
+        },
+        {
+          "rank": 3,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 114991.67,
+          "residual": -9258.13,
+          "abs_error": 9258.13,
+          "pct_error": 8.76
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126824.59,
+          "residual": 7482.76,
+          "abs_error": 7482.76,
+          "pct_error": 5.57
+        },
+        {
+          "rank": 5,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 102493.71,
+          "residual": -5065.87,
+          "abs_error": 5065.87,
+          "pct_error": 5.2
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 129648.15,
+          "residual": -4277.78,
+          "abs_error": 4277.78,
+          "pct_error": 3.41
+        },
+        {
+          "rank": 7,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 103562.71,
+          "residual": 3841.63,
+          "abs_error": 3841.63,
+          "pct_error": 3.58
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 103641.17,
+          "residual": -3703.58,
+          "abs_error": 3703.58,
+          "pct_error": 3.71
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 81340.58,
+          "residual": -334.82,
+          "abs_error": 334.82,
+          "pct_error": 0.41
+        },
+        {
+          "rank": 10,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 122636.25,
+          "residual": 140.61,
+          "abs_error": 140.61,
+          "pct_error": 0.11
+        }
+      ]
+    },
+    {
+      "k": 4,
+      "features": [
+        "R&D Spend",
+        "Administration",
+        "State_Florida",
+        "State_New York"
+      ],
+      "rmse": 9316.536408931313,
+      "mae": 7436.615539464922,
+      "r2": 0.892814645291944,
+      "adj_r2": 0.8070663615254992,
+      "f_stat": 170.6786340616792,
+      "f_pvalue": 1.9439999273953921e-22,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 59548.79872351126,
+          "stderr": 7481.876267087384,
+          "tstat": 7.9590729113585015,
+          "pvalue": 2.311712491059417e-09,
+          "ci_lower": 44359.78239550908,
+          "ci_upper": 74737.81505151343,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.859938105572067,
+          "stderr": 0.033782818039382566,
+          "tstat": 25.45489557945071,
+          "pvalue": 3.60547103085509e-24,
+          "ci_lower": 0.7913553388316777,
+          "ci_upper": 0.9285208723124562,
+          "vif": 1.06
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.09627820462326225,
+          "stderr": 0.05786173732171951,
+          "tstat": -1.6639356002731427,
+          "pvalue": 0.10505495717775651,
+          "ci_lower": -0.2137437763024238,
+          "ci_upper": 0.021187367055899284,
+          "vif": 1.03
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 2214.6644770400617,
+          "stderr": 3819.9797282104255,
+          "tstat": 0.579758175333978,
+          "pvalue": 0.5657913278745634,
+          "ci_lower": -5540.306654955513,
+          "ci_upper": 9969.635609035637,
+          "vif": 1.38
+        },
+        {
+          "feature": "State_New York",
+          "coef": 567.6111672650651,
+          "stderr": 3904.911698814102,
+          "tstat": 0.14535825930134225,
+          "pvalue": 0.8852619173039225,
+          "ci_lower": -7359.781031614958,
+          "ci_upper": 8495.003366145089,
+          "vif": 1.39
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 55600.8,
+          "residual": -19927.39,
+          "abs_error": 19927.39,
+          "pct_error": 55.86
+        },
+        {
+          "rank": 2,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 49023.31,
+          "residual": 15902.77,
+          "abs_error": 15902.77,
+          "pct_error": 24.49
+        },
+        {
+          "rank": 3,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 125611.34,
+          "residual": 8696.01,
+          "abs_error": 8696.01,
+          "pct_error": 6.47
+        },
+        {
+          "rank": 4,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 112664.48,
+          "residual": -6930.94,
+          "abs_error": 6930.94,
+          "pct_error": 6.56
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 101720.52,
+          "residual": 5683.82,
+          "abs_error": 5683.82,
+          "pct_error": 5.29
+        },
+        {
+          "rank": 6,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 101635.46,
+          "residual": -4207.62,
+          "abs_error": 4207.62,
+          "pct_error": 4.32
+        },
+        {
+          "rank": 7,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 103941.14,
+          "residual": -4003.55,
+          "abs_error": 4003.55,
+          "pct_error": 4.01
+        },
+        {
+          "rank": 8,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84717.36,
+          "residual": -3711.6,
+          "abs_error": 3711.6,
+          "pct_error": 4.58
+        },
+        {
+          "rank": 9,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 119651.94,
+          "residual": 3124.92,
+          "abs_error": 3124.92,
+          "pct_error": 2.55
+        },
+        {
+          "rank": 10,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 127547.9,
+          "residual": -2177.53,
+          "abs_error": 2177.53,
+          "pct_error": 1.74
+        }
+      ]
+    },
+    {
+      "k": 5,
+      "features": [
+        "R&D Spend",
+        "Administration",
+        "Marketing Spend",
+        "State_Florida",
+        "State_New York"
+      ],
+      "rmse": 9055.957323204313,
+      "mae": 6961.477813004754,
+      "r2": 0.8987266414385482,
+      "adj_r2": 0.7721349432367335,
+      "f_stat": 140.07459350755775,
+      "f_pvalue": 1.1313289000735628e-21,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54028.03959405866,
+          "stderr": 8457.29324924686,
+          "tstat": 6.388337024835927,
+          "pvalue": 2.7088901654461396e-07,
+          "ci_lower": 36840.75182458692,
+          "ci_upper": 71215.3273635304,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056300637569407,
+          "stderr": 0.052371248753148185,
+          "tstat": 15.383060036515015,
+          "pvalue": 6.997778741694063e-17,
+          "ci_lower": 0.6991988810322429,
+          "ci_upper": 0.9120612464816384,
+          "vif": 2.62
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878788228413182,
+          "stderr": 0.0607372587900008,
+          "tstat": -1.1325483509548244,
+          "pvalue": 0.2653279920845564,
+          "ci_lower": -0.1922208429711203,
+          "ci_upper": 0.05464507840285665,
+          "vif": 1.16
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.02985544291038652,
+          "stderr": 0.022176901345215615,
+          "tstat": 1.3462405069871248,
+          "pvalue": 0.1871324843205115,
+          "ci_lower": -0.01521344308210864,
+          "ci_upper": 0.07492432890288167,
+          "vif": 2.7
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 938.7930061484293,
+          "stderr": 3893.510884602306,
+          "tstat": 0.24111734472377627,
+          "pvalue": 0.8109123470731273,
+          "ci_lower": -6973.7731110533805,
+          "ci_upper": 8851.35912335024,
+          "vif": 1.47
+        },
+        {
+          "feature": "State_New York",
+          "coef": 6.987759966977347,
+          "stderr": 3882.7648769594743,
+          "tstat": 0.001799686612095178,
+          "pvalue": 0.9985745767960493,
+          "ci_lower": -7883.739842205602,
+          "ci_upper": 7897.715362139556,
+          "vif": 1.41
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46357.46,
+          "residual": 18568.62,
+          "abs_error": 18568.62,
+          "pct_error": 28.6
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50912.42,
+          "residual": -15239.01,
+          "abs_error": 15239.01,
+          "pct_error": 42.72
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113097.43,
+          "residual": 9679.43,
+          "abs_error": 9679.43,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126362.88,
+          "residual": 7944.47,
+          "abs_error": 7944.47,
+          "pct_error": 5.92
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100643.24,
+          "residual": 6761.1,
+          "abs_error": 6761.1,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109741.35,
+          "residual": -4007.81,
+          "abs_error": 4007.81,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84608.45,
+          "residual": -3602.69,
+          "abs_error": 3602.69,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128750.48,
+          "residual": -3380.11,
+          "abs_error": 3380.11,
+          "pct_error": 2.7
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99677.49,
+          "residual": 260.1,
+          "abs_error": 260.1,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97599.28,
+          "residual": -171.44,
+          "abs_error": 171.44,
+          "pct_error": 0.18
+        }
+      ]
+    }
+  ],
+  "ElasticNet": [
+    {
+      "k": 1,
+      "features": [
+        "R&D Spend"
+      ],
+      "rmse": 7714.334890830191,
+      "mae": 6077.363300620414,
+      "r2": 0.926510810934195,
+      "adj_r2": 0.9173246623009693,
+      "f_stat": 676.1034669260158,
+      "f_pvalue": 8.220226885843815e-26,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 49336.668037991134,
+          "stderr": 2985.8187403673196,
+          "tstat": 16.523664806230556,
+          "pvalue": 6.146014093294155e-19,
+          "ci_lower": 43292.19400549254,
+          "ci_upper": 55381.142070489725,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8536091075148805,
+          "stderr": 0.032828607283217764,
+          "tstat": 26.00198967171087,
+          "pvalue": 8.220226894222919e-26,
+          "ci_lower": 0.7871510665213765,
+          "ci_upper": 0.9200671485083846,
+          "vif": 1.0
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 50190.47,
+          "residual": 14735.61,
+          "abs_error": 14735.61,
+          "pct_error": 22.7
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 49799.37,
+          "residual": -14125.96,
+          "abs_error": 14125.96,
+          "pct_error": 39.6
+        },
+        {
+          "rank": 3,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 113638.08,
+          "residual": -7904.54,
+          "abs_error": 7904.54,
+          "pct_error": 7.48
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 127862.21,
+          "residual": 6445.14,
+          "abs_error": 6445.14,
+          "pct_error": 4.8
+        },
+        {
+          "rank": 5,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 103463.05,
+          "residual": -6035.21,
+          "abs_error": 6035.21,
+          "pct_error": 6.19
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 130136.88,
+          "residual": -4766.51,
+          "abs_error": 4766.51,
+          "pct_error": 3.8
+        },
+        {
+          "rank": 7,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 104535.05,
+          "residual": 2869.29,
+          "abs_error": 2869.29,
+          "pct_error": 2.67
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 102255.72,
+          "residual": -2318.13,
+          "abs_error": 2318.13,
+          "pct_error": 2.32
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 82250.56,
+          "residual": -1244.8,
+          "abs_error": 1244.8,
+          "pct_error": 1.54
+        },
+        {
+          "rank": 10,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 123105.31,
+          "residual": -328.45,
+          "abs_error": 328.45,
+          "pct_error": 0.27
+        }
+      ]
+    },
+    {
+      "k": 2,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend"
+      ],
+      "rmse": 8206.328813165846,
+      "mae": 6469.181721468587,
+      "r2": 0.9168381183550248,
+      "adj_r2": 0.8930775807421748,
+      "f_stat": 365.97812901160347,
+      "f_pvalue": 4.19325848499459e-25,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 45542.39247751433,
+          "stderr": 3457.2769577270465,
+          "tstat": 13.172908342135175,
+          "pvalue": 1.531530019003237e-15,
+          "ci_lower": 38537.28396316358,
+          "ci_upper": 52547.50099186508,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.7833743148902913,
+          "stderr": 0.047535123344667335,
+          "tstat": 16.479904958070822,
+          "pvalue": 1.2571105454840534e-18,
+          "ci_lower": 0.6870590062401672,
+          "ci_upper": 0.8796896235404154,
+          "vif": 2.26
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.039239787145531474,
+          "stderr": 0.01982183326747554,
+          "tstat": 1.97962451888432,
+          "pvalue": 0.05522150413968163,
+          "ci_lower": -0.0009230620244471271,
+          "ci_upper": 0.07940263631551008,
+          "vif": 2.26
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46400.66,
+          "residual": 18525.42,
+          "abs_error": 18525.42,
+          "pct_error": 28.53
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 45967.02,
+          "residual": -10293.61,
+          "abs_error": 10293.61,
+          "pct_error": 28.86
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113241.37,
+          "residual": 9535.49,
+          "abs_error": 9535.49,
+          "pct_error": 7.77
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 127521.39,
+          "residual": 6785.96,
+          "abs_error": 6785.96,
+          "pct_error": 5.05
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 101612.69,
+          "residual": 5791.65,
+          "abs_error": 5791.65,
+          "pct_error": 5.39
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 130782.54,
+          "residual": -5412.17,
+          "abs_error": 5412.17,
+          "pct_error": 4.32
+        },
+        {
+          "rank": 7,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109813.19,
+          "residual": -4079.65,
+          "abs_error": 4079.65,
+          "pct_error": 3.86
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 97683.25,
+          "residual": 2254.34,
+          "abs_error": 2254.34,
+          "pct_error": 2.26
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 82615.07,
+          "residual": -1609.31,
+          "abs_error": 1609.31,
+          "pct_error": 1.99
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97023.64,
+          "residual": 404.2,
+          "abs_error": 404.2,
+          "pct_error": 0.41
+        }
+      ]
+    },
+    {
+      "k": 3,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration"
+      ],
+      "rmse": 8995.90580336142,
+      "mae": 6979.152252370417,
+      "r2": 0.900065308303732,
+      "adj_r2": 0.850097962455598,
+      "f_stat": 246.58042982881324,
+      "f_pvalue": 4.761593318116774e-24,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54071.87574599091,
+          "stderr": 8166.659963193355,
+          "tstat": 6.621051444493784,
+          "pvalue": 1.0366754198999402e-07,
+          "ci_lower": 37509.12166659124,
+          "ci_upper": 70634.62982539058,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8037792756297518,
+          "stderr": 0.05053425023306851,
+          "tstat": 15.905633741920568,
+          "pvalue": 7.338837253380498e-18,
+          "ci_lower": 0.7012910658880207,
+          "ci_upper": 0.9062674853714829,
+          "vif": 2.57
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.031241545897733262,
+          "stderr": 0.020921171921393863,
+          "tstat": 1.4932980817286745,
+          "pvalue": 0.14407259574973222,
+          "ci_lower": -0.011188557369526269,
+          "ci_upper": 0.07367164916499279,
+          "vif": 2.54
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06792917400150003,
+          "stderr": 0.058980242074043725,
+          "tstat": -1.1517276228914393,
+          "pvalue": 0.25702465096095795,
+          "ci_lower": -0.18754664912824287,
+          "ci_upper": 0.051688301125242794,
+          "vif": 1.15
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46501.71,
+          "residual": 18424.37,
+          "abs_error": 18424.37,
+          "pct_error": 28.38
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50992.69,
+          "residual": -15319.28,
+          "abs_error": 15319.28,
+          "pct_error": 42.94
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113106.15,
+          "residual": 9670.71,
+          "abs_error": 9670.71,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126703.03,
+          "residual": 7604.32,
+          "abs_error": 7604.32,
+          "pct_error": 5.66
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100878.46,
+          "residual": 6525.88,
+          "abs_error": 6525.88,
+          "pct_error": 6.08
+        },
+        {
+          "rank": 6,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84894.75,
+          "residual": -3888.99,
+          "abs_error": 3888.99,
+          "pct_error": 4.8
+        },
+        {
+          "rank": 7,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 129128.4,
+          "residual": -3758.03,
+          "abs_error": 3758.03,
+          "pct_error": 3.0
+        },
+        {
+          "rank": 8,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109016.55,
+          "residual": -3283.01,
+          "abs_error": 3283.01,
+          "pct_error": 3.1
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 98893.42,
+          "residual": 1044.17,
+          "abs_error": 1044.17,
+          "pct_error": 1.04
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97700.6,
+          "residual": -272.76,
+          "abs_error": 272.76,
+          "pct_error": 0.28
+        }
+      ]
+    },
+    {
+      "k": 4,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration",
+        "State_Florida"
+      ],
+      "rmse": 9055.957751980784,
+      "mae": 6961.4868454714,
+      "r2": 0.8987266318484777,
+      "adj_r2": 0.8177079373272598,
+      "f_stat": 180.2430251126897,
+      "f_pvalue": 7.853484479981325e-23,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54029.88591914206,
+          "stderr": 8274.04324949254,
+          "tstat": 6.530046349764463,
+          "pvalue": 1.5570611505025902e-07,
+          "ci_lower": 37232.68511966102,
+          "ci_upper": 70827.0867186231,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056328218977676,
+          "stderr": 0.051595562534085135,
+          "tstat": 15.614381980340834,
+          "pvalue": 2.413164896610224e-17,
+          "ci_lower": 0.7008882613347851,
+          "ci_upper": 0.9103773824607502,
+          "vif": 2.61
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.02985972351662242,
+          "stderr": 0.021731713819147763,
+          "tstat": 1.3740160470138847,
+          "pvalue": 0.17817276480207192,
+          "ci_lower": -0.014258001002096992,
+          "ci_upper": 0.07397744803534183,
+          "vif": 2.67
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878374611887916,
+          "stderr": 0.05982042638465329,
+          "tstat": -1.1498371087593147,
+          "pvalue": 0.25800739948881984,
+          "ci_lower": -0.1902256679936798,
+          "ci_upper": 0.05265817575592148,
+          "vif": 1.15
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 935.0793356301194,
+          "stderr": 3254.2109708154194,
+          "tstat": 0.2873444112923672,
+          "pvalue": 0.7755430897332983,
+          "ci_lower": -5671.320156421509,
+          "ci_upper": 7541.478827681747,
+          "vif": 1.06
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46352.84,
+          "residual": 18573.24,
+          "abs_error": 18573.24,
+          "pct_error": 28.61
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50907.49,
+          "residual": -15234.08,
+          "abs_error": 15234.08,
+          "pct_error": 42.7
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113093.16,
+          "residual": 9683.7,
+          "abs_error": 9683.7,
+          "pct_error": 7.89
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126366.62,
+          "residual": 7940.73,
+          "abs_error": 7940.73,
+          "pct_error": 5.91
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100646.44,
+          "residual": 6757.9,
+          "abs_error": 6757.9,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109740.86,
+          "residual": -4007.32,
+          "abs_error": 4007.32,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84611.5,
+          "residual": -3605.74,
+          "abs_error": 3605.74,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128747.41,
+          "residual": -3377.04,
+          "abs_error": 3377.04,
+          "pct_error": 2.69
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99676.67,
+          "residual": 260.92,
+          "abs_error": 260.92,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97602.03,
+          "residual": -174.19,
+          "abs_error": 174.19,
+          "pct_error": 0.18
+        }
+      ]
+    },
+    {
+      "k": 5,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend",
+        "Administration",
+        "State_Florida",
+        "State_New York"
+      ],
+      "rmse": 9055.957323204308,
+      "mae": 6961.477813004758,
+      "r2": 0.8987266414385483,
+      "adj_r2": 0.7721349432367337,
+      "f_stat": 140.0745935075578,
+      "f_pvalue": 1.1313289000735549e-21,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54028.03959405867,
+          "stderr": 8457.293261792433,
+          "tstat": 6.388337015359451,
+          "pvalue": 2.7088902416355763e-07,
+          "ci_lower": 36840.75179909126,
+          "ci_upper": 71215.32738902608,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056300637569412,
+          "stderr": 0.052371248760988434,
+          "tstat": 15.383060034212102,
+          "pvalue": 6.997778772961148e-17,
+          "ci_lower": 0.6991988810163101,
+          "ci_upper": 0.9120612464975724,
+          "vif": 2.62
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.029855442910386703,
+          "stderr": 0.022176901353311698,
+          "tstat": 1.3462405064956633,
+          "pvalue": 0.18713248447738168,
+          "ci_lower": -0.015213443098561676,
+          "ci_upper": 0.07492432891933508,
+          "vif": 2.7
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878788228413206,
+          "stderr": 0.06073725886344327,
+          "tstat": -1.1325483495853699,
+          "pvalue": 0.2653279926519069,
+          "ci_lower": -0.19222084312037357,
+          "ci_upper": 0.05464507855210947,
+          "vif": 1.16
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 938.7930061484358,
+          "stderr": 3893.510884641537,
+          "tstat": 0.24111734472134844,
+          "pvalue": 0.8109123470749936,
+          "ci_lower": -6973.7731111331,
+          "ci_upper": 8851.359123429971,
+          "vif": 1.47
+        },
+        {
+          "feature": "State_New York",
+          "coef": 6.9877599669873005,
+          "stderr": 3882.7648770368705,
+          "tstat": 0.0017996866120618678,
+          "pvalue": 0.9985745767960756,
+          "ci_lower": -7883.73984236288,
+          "ci_upper": 7897.715362296854,
+          "vif": 1.41
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46357.46,
+          "residual": 18568.62,
+          "abs_error": 18568.62,
+          "pct_error": 28.6
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50912.42,
+          "residual": -15239.01,
+          "abs_error": 15239.01,
+          "pct_error": 42.72
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113097.43,
+          "residual": 9679.43,
+          "abs_error": 9679.43,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126362.88,
+          "residual": 7944.47,
+          "abs_error": 7944.47,
+          "pct_error": 5.92
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100643.24,
+          "residual": 6761.1,
+          "abs_error": 6761.1,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109741.35,
+          "residual": -4007.81,
+          "abs_error": 4007.81,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84608.45,
+          "residual": -3602.69,
+          "abs_error": 3602.69,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128750.48,
+          "residual": -3380.11,
+          "abs_error": 3380.11,
+          "pct_error": 2.7
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99677.49,
+          "residual": 260.1,
+          "abs_error": 260.1,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97599.28,
+          "residual": -171.44,
+          "abs_error": 171.44,
+          "pct_error": 0.18
+        }
+      ]
+    }
+  ],
+  "Exhaustive": [
+    {
+      "k": 1,
+      "features": [
+        "R&D Spend"
+      ],
+      "rmse": 7714.334890830191,
+      "mae": 6077.363300620414,
+      "r2": 0.926510810934195,
+      "adj_r2": 0.9173246623009693,
+      "f_stat": 676.1034669260158,
+      "f_pvalue": 8.220226885843815e-26,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 49336.668037991134,
+          "stderr": 2985.8187403673196,
+          "tstat": 16.523664806230556,
+          "pvalue": 6.146014093294155e-19,
+          "ci_lower": 43292.19400549254,
+          "ci_upper": 55381.142070489725,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8536091075148805,
+          "stderr": 0.032828607283217764,
+          "tstat": 26.00198967171087,
+          "pvalue": 8.220226894222919e-26,
+          "ci_lower": 0.7871510665213765,
+          "ci_upper": 0.9200671485083846,
+          "vif": 1.0
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 50190.47,
+          "residual": 14735.61,
+          "abs_error": 14735.61,
+          "pct_error": 22.7
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 49799.37,
+          "residual": -14125.96,
+          "abs_error": 14125.96,
+          "pct_error": 39.6
+        },
+        {
+          "rank": 3,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 113638.08,
+          "residual": -7904.54,
+          "abs_error": 7904.54,
+          "pct_error": 7.48
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 127862.21,
+          "residual": 6445.14,
+          "abs_error": 6445.14,
+          "pct_error": 4.8
+        },
+        {
+          "rank": 5,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 103463.05,
+          "residual": -6035.21,
+          "abs_error": 6035.21,
+          "pct_error": 6.19
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 130136.88,
+          "residual": -4766.51,
+          "abs_error": 4766.51,
+          "pct_error": 3.8
+        },
+        {
+          "rank": 7,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 104535.05,
+          "residual": 2869.29,
+          "abs_error": 2869.29,
+          "pct_error": 2.67
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 102255.72,
+          "residual": -2318.13,
+          "abs_error": 2318.13,
+          "pct_error": 2.32
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 82250.56,
+          "residual": -1244.8,
+          "abs_error": 1244.8,
+          "pct_error": 1.54
+        },
+        {
+          "rank": 10,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 123105.31,
+          "residual": -328.45,
+          "abs_error": 328.45,
+          "pct_error": 0.27
+        }
+      ]
+    },
+    {
+      "k": 2,
+      "features": [
+        "R&D Spend",
+        "Marketing Spend"
+      ],
+      "rmse": 8206.328813165846,
+      "mae": 6469.181721468587,
+      "r2": 0.9168381183550248,
+      "adj_r2": 0.8930775807421748,
+      "f_stat": 365.97812901160347,
+      "f_pvalue": 4.19325848499459e-25,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 45542.39247751433,
+          "stderr": 3457.2769577270465,
+          "tstat": 13.172908342135175,
+          "pvalue": 1.531530019003237e-15,
+          "ci_lower": 38537.28396316358,
+          "ci_upper": 52547.50099186508,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.7833743148902913,
+          "stderr": 0.047535123344667335,
+          "tstat": 16.479904958070822,
+          "pvalue": 1.2571105454840534e-18,
+          "ci_lower": 0.6870590062401672,
+          "ci_upper": 0.8796896235404154,
+          "vif": 2.26
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.039239787145531474,
+          "stderr": 0.01982183326747554,
+          "tstat": 1.97962451888432,
+          "pvalue": 0.05522150413968163,
+          "ci_lower": -0.0009230620244471271,
+          "ci_upper": 0.07940263631551008,
+          "vif": 2.26
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46400.66,
+          "residual": 18525.42,
+          "abs_error": 18525.42,
+          "pct_error": 28.53
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 45967.02,
+          "residual": -10293.61,
+          "abs_error": 10293.61,
+          "pct_error": 28.86
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113241.37,
+          "residual": 9535.49,
+          "abs_error": 9535.49,
+          "pct_error": 7.77
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 127521.39,
+          "residual": 6785.96,
+          "abs_error": 6785.96,
+          "pct_error": 5.05
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 101612.69,
+          "residual": 5791.65,
+          "abs_error": 5791.65,
+          "pct_error": 5.39
+        },
+        {
+          "rank": 6,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 130782.54,
+          "residual": -5412.17,
+          "abs_error": 5412.17,
+          "pct_error": 4.32
+        },
+        {
+          "rank": 7,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109813.19,
+          "residual": -4079.65,
+          "abs_error": 4079.65,
+          "pct_error": 3.86
+        },
+        {
+          "rank": 8,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 97683.25,
+          "residual": 2254.34,
+          "abs_error": 2254.34,
+          "pct_error": 2.26
+        },
+        {
+          "rank": 9,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 82615.07,
+          "residual": -1609.31,
+          "abs_error": 1609.31,
+          "pct_error": 1.99
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97023.64,
+          "residual": 404.2,
+          "abs_error": 404.2,
+          "pct_error": 0.41
+        }
+      ]
+    },
+    {
+      "k": 3,
+      "features": [
+        "R&D Spend",
+        "Administration",
+        "Marketing Spend"
+      ],
+      "rmse": 8995.9058033614,
+      "mae": 6979.152252370402,
+      "r2": 0.9000653083037324,
+      "adj_r2": 0.8500979624555987,
+      "f_stat": 246.58042982881312,
+      "f_pvalue": 4.7615933181168116e-24,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54071.87574599088,
+          "stderr": 8166.659963189117,
+          "tstat": 6.6210514444972155,
+          "pvalue": 1.0366754198890978e-07,
+          "ci_lower": 37509.12166659981,
+          "ci_upper": 70634.62982538196,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8037792756297525,
+          "stderr": 0.05053425023313301,
+          "tstat": 15.90563374190028,
+          "pvalue": 7.338837253676625e-18,
+          "ci_lower": 0.7012910658878905,
+          "ci_upper": 0.9062674853716145,
+          "vif": 2.57
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06792917400149973,
+          "stderr": 0.05898024207401855,
+          "tstat": -1.1517276228919258,
+          "pvalue": 0.25702465096076055,
+          "ci_lower": -0.1875466491281915,
+          "ci_upper": 0.05168830112519204,
+          "vif": 1.15
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.03124154589773319,
+          "stderr": 0.020921171921627298,
+          "tstat": 1.493298081712009,
+          "pvalue": 0.14407259575407605,
+          "ci_lower": -0.011188557369999769,
+          "ci_upper": 0.07367164916546615,
+          "vif": 2.54
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46501.71,
+          "residual": 18424.37,
+          "abs_error": 18424.37,
+          "pct_error": 28.38
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50992.69,
+          "residual": -15319.28,
+          "abs_error": 15319.28,
+          "pct_error": 42.94
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113106.15,
+          "residual": 9670.71,
+          "abs_error": 9670.71,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126703.03,
+          "residual": 7604.32,
+          "abs_error": 7604.32,
+          "pct_error": 5.66
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100878.46,
+          "residual": 6525.88,
+          "abs_error": 6525.88,
+          "pct_error": 6.08
+        },
+        {
+          "rank": 6,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84894.75,
+          "residual": -3888.99,
+          "abs_error": 3888.99,
+          "pct_error": 4.8
+        },
+        {
+          "rank": 7,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 129128.4,
+          "residual": -3758.03,
+          "abs_error": 3758.03,
+          "pct_error": 3.0
+        },
+        {
+          "rank": 8,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109016.55,
+          "residual": -3283.01,
+          "abs_error": 3283.01,
+          "pct_error": 3.1
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 98893.42,
+          "residual": 1044.17,
+          "abs_error": 1044.17,
+          "pct_error": 1.04
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97700.6,
+          "residual": -272.76,
+          "abs_error": 272.76,
+          "pct_error": 0.28
+        }
+      ]
+    },
+    {
+      "k": 4,
+      "features": [
+        "R&D Spend",
+        "Administration",
+        "Marketing Spend",
+        "State_Florida"
+      ],
+      "rmse": 9055.957751980774,
+      "mae": 6961.486845471397,
+      "r2": 0.8987266318484779,
+      "adj_r2": 0.8177079373272602,
+      "f_stat": 180.24302511268965,
+      "f_pvalue": 7.853484479981382e-23,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54029.885919142005,
+          "stderr": 8274.04324091318,
+          "tstat": 6.530046356535465,
+          "pvalue": 1.5570611188050863e-07,
+          "ci_lower": 37232.68513707799,
+          "ci_upper": 70827.08670120602,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056328218977671,
+          "stderr": 0.05159556253355431,
+          "tstat": 15.614381980501468,
+          "pvalue": 2.4131648958474794e-17,
+          "ci_lower": 0.7008882613358621,
+          "ci_upper": 0.910377382459672,
+          "vif": 2.61
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878374611887857,
+          "stderr": 0.05982042632959687,
+          "tstat": -1.1498371098175706,
+          "pvalue": 0.258007399058718,
+          "ci_lower": -0.19022566788190873,
+          "ci_upper": 0.052658175644151595,
+          "vif": 1.15
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.029859723516622715,
+          "stderr": 0.0217317138172323,
+          "tstat": 1.374016047135006,
+          "pvalue": 0.17817276476480112,
+          "ci_lower": -0.0142580009982081,
+          "ci_upper": 0.07397744803145354,
+          "vif": 2.67
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 935.0793356301126,
+          "stderr": 3254.210970806247,
+          "tstat": 0.287344411293175,
+          "pvalue": 0.7755430897326849,
+          "ci_lower": -5671.320156402895,
+          "ci_upper": 7541.478827663121,
+          "vif": 1.06
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46352.84,
+          "residual": 18573.24,
+          "abs_error": 18573.24,
+          "pct_error": 28.61
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50907.49,
+          "residual": -15234.08,
+          "abs_error": 15234.08,
+          "pct_error": 42.7
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113093.16,
+          "residual": 9683.7,
+          "abs_error": 9683.7,
+          "pct_error": 7.89
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126366.62,
+          "residual": 7940.73,
+          "abs_error": 7940.73,
+          "pct_error": 5.91
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100646.44,
+          "residual": 6757.9,
+          "abs_error": 6757.9,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109740.86,
+          "residual": -4007.32,
+          "abs_error": 4007.32,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84611.5,
+          "residual": -3605.74,
+          "abs_error": 3605.74,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128747.41,
+          "residual": -3377.04,
+          "abs_error": 3377.04,
+          "pct_error": 2.69
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99676.67,
+          "residual": 260.92,
+          "abs_error": 260.92,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97602.03,
+          "residual": -174.19,
+          "abs_error": 174.19,
+          "pct_error": 0.18
+        }
+      ]
+    },
+    {
+      "k": 5,
+      "features": [
+        "R&D Spend",
+        "Administration",
+        "Marketing Spend",
+        "State_Florida",
+        "State_New York"
+      ],
+      "rmse": 9055.957323204313,
+      "mae": 6961.477813004754,
+      "r2": 0.8987266414385482,
+      "adj_r2": 0.7721349432367335,
+      "f_stat": 140.07459350755775,
+      "f_pvalue": 1.1313289000735628e-21,
+      "coefficients": [
+        {
+          "feature": "Intercept",
+          "coef": 54028.03959405866,
+          "stderr": 8457.29324924686,
+          "tstat": 6.388337024835927,
+          "pvalue": 2.7088901654461396e-07,
+          "ci_lower": 36840.75182458692,
+          "ci_upper": 71215.3273635304,
+          "vif": null
+        },
+        {
+          "feature": "R&D Spend",
+          "coef": 0.8056300637569407,
+          "stderr": 0.052371248753148185,
+          "tstat": 15.383060036515015,
+          "pvalue": 6.997778741694063e-17,
+          "ci_lower": 0.6991988810322429,
+          "ci_upper": 0.9120612464816384,
+          "vif": 2.62
+        },
+        {
+          "feature": "Administration",
+          "coef": -0.06878788228413182,
+          "stderr": 0.0607372587900008,
+          "tstat": -1.1325483509548244,
+          "pvalue": 0.2653279920845564,
+          "ci_lower": -0.1922208429711203,
+          "ci_upper": 0.05464507840285665,
+          "vif": 1.16
+        },
+        {
+          "feature": "Marketing Spend",
+          "coef": 0.02985544291038652,
+          "stderr": 0.022176901345215615,
+          "tstat": 1.3462405069871248,
+          "pvalue": 0.1871324843205115,
+          "ci_lower": -0.01521344308210864,
+          "ci_upper": 0.07492432890288167,
+          "vif": 2.7
+        },
+        {
+          "feature": "State_Florida",
+          "coef": 938.7930061484293,
+          "stderr": 3893.510884602306,
+          "tstat": 0.24111734472377627,
+          "pvalue": 0.8109123470731273,
+          "ci_lower": -6973.7731110533805,
+          "ci_upper": 8851.35912335024,
+          "vif": 1.47
+        },
+        {
+          "feature": "State_New York",
+          "coef": 6.987759966977347,
+          "stderr": 3882.7648769594743,
+          "tstat": 0.001799686612095178,
+          "pvalue": 0.9985745767960493,
+          "ci_lower": -7883.739842205602,
+          "ci_upper": 7897.715362139556,
+          "vif": 1.41
+        }
+      ],
+      "outliers": [
+        {
+          "rank": 1,
+          "index": 45,
+          "actual": 64926.08,
+          "predicted": 46357.46,
+          "residual": 18568.62,
+          "abs_error": 18568.62,
+          "pct_error": 28.6
+        },
+        {
+          "rank": 2,
+          "index": 48,
+          "actual": 35673.41,
+          "predicted": 50912.42,
+          "residual": -15239.01,
+          "abs_error": 15239.01,
+          "pct_error": 42.72
+        },
+        {
+          "rank": 3,
+          "index": 19,
+          "actual": 122776.86,
+          "predicted": 113097.43,
+          "residual": 9679.43,
+          "abs_error": 9679.43,
+          "pct_error": 7.88
+        },
+        {
+          "rank": 4,
+          "index": 13,
+          "actual": 134307.35,
+          "predicted": 126362.88,
+          "residual": 7944.47,
+          "abs_error": 7944.47,
+          "pct_error": 5.92
+        },
+        {
+          "rank": 5,
+          "index": 25,
+          "actual": 107404.34,
+          "predicted": 100643.24,
+          "residual": 6761.1,
+          "abs_error": 6761.1,
+          "pct_error": 6.29
+        },
+        {
+          "rank": 6,
+          "index": 26,
+          "actual": 105733.54,
+          "predicted": 109741.35,
+          "residual": -4007.81,
+          "abs_error": 4007.81,
+          "pct_error": 3.79
+        },
+        {
+          "rank": 7,
+          "index": 39,
+          "actual": 81005.76,
+          "predicted": 84608.45,
+          "residual": -3602.69,
+          "abs_error": 3602.69,
+          "pct_error": 4.45
+        },
+        {
+          "rank": 8,
+          "index": 17,
+          "actual": 125370.37,
+          "predicted": 128750.48,
+          "residual": -3380.11,
+          "abs_error": 3380.11,
+          "pct_error": 2.7
+        },
+        {
+          "rank": 9,
+          "index": 30,
+          "actual": 99937.59,
+          "predicted": 99677.49,
+          "residual": 260.1,
+          "abs_error": 260.1,
+          "pct_error": 0.26
+        },
+        {
+          "rank": 10,
+          "index": 32,
+          "actual": 97427.84,
+          "predicted": 97599.28,
+          "residual": -171.44,
+          "abs_error": 171.44,
+          "pct_error": 0.18
+        }
+      ]
+    }
+  ]
+}
