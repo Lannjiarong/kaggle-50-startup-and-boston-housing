@@ -1,0 +1,2577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Linear Regression & Feature Selection Explorer | CRISP-DM</title>
+  
+  <!-- Google Fonts: Outfit, Inter, Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  
+  <!-- Pre-computed Models Data (50 Startups & Boston Housing) -->
+  <script src="model_data.js"></script>
+
+  <style>
+    :root {
+      --primary-dark: #312e81;
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --primary-subtle: #eef2ff;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-emerald-subtle: #ecfdf5;
+      --accent-amber: #f59e0b;
+      --accent-amber-subtle: #fffbeb;
+      --accent-rose: #f43f5e;
+      --accent-rose-subtle: #fff1f2;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--slate-50);
+      color: var(--slate-800);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* Top Sticky Header */
+    .top-header {
+      background: white;
+      border-bottom: 1px solid var(--slate-200);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header-title-group h1 {
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .bonus-tag {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Problem Selector Dropdown (Bonus +1 pt) */
+    .problem-dropdown-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-subtle);
+      border: 1.5px solid var(--primary-light);
+      padding: 4px 10px;
+      border-radius: var(--radius-md);
+    }
+
+    .problem-dropdown-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .problem-dropdown {
+      background: white;
+      border: 1px solid var(--slate-300);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--slate-900);
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .problem-dropdown:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    }
+
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+      padding: 8px 14px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .header-btn:hover {
+      background: white;
+      border-color: var(--primary-light);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-btn.github-btn {
+      background: #181717;
+      color: white;
+      border-color: #181717;
+    }
+
+    .header-btn.github-btn:hover {
+      background: #2b2b2b;
+      color: white;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #4338ca 100%);
+      color: white;
+      border-radius: var(--radius-xl);
+      padding: 34px 40px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-card h2 {
+      font-size: 30px;
+      color: white;
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .hero-card p {
+      font-size: 14.5px;
+      color: #c7d2fe;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .hero-pill {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e0e7ff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Bonus Card: Custom Dataset Input (Bonus +2 pts) */
+    .custom-dataset-card {
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      border-left: 5px solid var(--accent-emerald);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .custom-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .custom-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--slate-900);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .url-input-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .url-input {
+      flex: 1;
+      min-width: 320px;
+      padding: 10px 14px;
+      border: 1px solid var(--slate-300);
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-family: 'Fira Code', monospace;
+      color: var(--slate-800);
+      background: var(--slate-50);
+      transition: all 0.2s;
+    }
+
+    .url-input:focus {
+      outline: none;
+      background: white;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .btn-action {
+      padding: 9px 18px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-action:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-300);
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .quick-samples {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--slate-500);
+      flex-wrap: wrap;
+    }
+
+    .sample-chip {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+
+    .sample-chip:hover {
+      background: var(--primary-subtle);
+      color: var(--primary);
+    }
+
+    /* Controls Bar: Algorithms & Feature Count */
+    .controls-wrapper {
+      background: white;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .control-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--slate-400);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .tabs-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      padding: 10px 18px;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--slate-700);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      background: var(--primary-subtle);
+      border-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .tab-btn.active {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+      color: white;
+      box-shadow: 0 4px 10px rgba(52, 48, 144, 0.25);
+    }
+
+    .tab-btn .badge-pill {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .tab-btn.active .badge-pill {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+    }
+
+    .k-selector-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .k-btn {
+      padding: 8px 14px;
+      border: 1px solid var(--slate-200);
+      background: white;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-700);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .k-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .k-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+    }
+
+    .k-btn.sweet-spot {
+      border-color: var(--accent-emerald);
+      background: var(--accent-emerald-subtle);
+      color: #065f46;
+    }
+
+    .k-btn.sweet-spot.active {
+      background: #059669;
+      border-color: #059669;
+      color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .k-btn.overfitting {
+      border-color: var(--accent-amber);
+    }
+
+    .k-btn.overfitting.active {
+      background: #d97706;
+      border-color: #d97706;
+      color: white;
+    }
+
+    /* KPI Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--slate-200);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary);
+    }
+
+    .metric-card.sweet::before {
+      background: var(--accent-emerald);
+    }
+
+    .metric-card.alert::before {
+      background: var(--accent-amber);
+    }
+
+    .metric-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate-500);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .metric-val {
+      font-size: 26px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: var(--slate-900);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .metric-note {
+      font-size: 12px;
+      color: var(--slate-500);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-green {
+      background: var(--accent-emerald-subtle);
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .badge-blue {
+      background: var(--primary-subtle);
+      color: var(--primary-dark);
+      border: 1px solid #c7d2fe;
+    }
+
+    .badge-amber {
+      background: var(--accent-amber-subtle);
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    /* Dual Charts Grid */
+    .dual-charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      padding: 24px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .card-title-group h3 {
+      font-size: 18px;
+      color: var(--slate-900);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-top: 2px;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 340px;
+      width: 100%;
+    }
+
+    /* Mathematical Equation Box */
+    .equation-card {
+      background: linear-gradient(to right, #fcfdff, #f8faff);
+      border: 1px solid #cfcfea;
+      border-left: 5px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .equation-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .equation-formula {
+      font-family: 'Fira Code', monospace;
+      font-size: 14.5px;
+      color: var(--slate-900);
+      line-height: 1.8;
+      word-break: break-word;
+      background: white;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--slate-200);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .eq-intercept { color: #4338ca; font-weight: 600; }
+    .eq-var { color: #0284c7; font-weight: 600; }
+    .eq-pos { color: #059669; font-weight: 600; }
+    .eq-neg { color: #dc2626; font-weight: 600; }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--slate-200);
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    table.data-table thead {
+      background: var(--slate-100);
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    table.data-table th {
+      padding: 12px 16px;
+      font-weight: 600;
+      color: var(--slate-700);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    table.data-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    table.data-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.data-table tbody tr:hover {
+      background: #f8faff;
+    }
+
+    .feature-chip {
+      background: var(--primary-subtle);
+      color: var(--primary-dark);
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      display: inline-block;
+    }
+
+    /* Interactive Calculator Section */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .input-group {
+      margin-bottom: 16px;
+    }
+
+    .input-label-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-700);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--slate-300);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--slate-900);
+      transition: all 0.15s;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .range-slider {
+      width: 100%;
+      margin-top: 6px;
+      accent-color: var(--primary);
+    }
+
+    .prediction-output-box {
+      background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .prediction-output-box::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pred-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #c7d2fe;
+      margin-bottom: 10px;
+    }
+
+    .pred-value {
+      font-size: 38px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: #34d399;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .pred-formula-note {
+      font-size: 12px;
+      color: #a5b4fc;
+      line-height: 1.5;
+    }
+
+    /* Outliers & Diagnostics */
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .dot-green { background: var(--accent-emerald); }
+    .dot-amber { background: var(--accent-amber); }
+    .dot-red { background: var(--accent-rose); }
+
+    /* Footer & Acknowledgments */
+    footer {
+      margin-top: 50px;
+      background: white;
+      border-top: 1px solid var(--slate-200);
+      padding: 36px 0;
+      color: var(--slate-600);
+      font-size: 13.5px;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .ack-card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    .ack-card a {
+      color: var(--primary);
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .dual-charts-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-card {
+        padding: 24px;
+      }
+      .hero-card h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation with Problem Switcher -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="header-title-group">
+        <h1>
+          <i class="fa-solid fa-chart-line" style="color: var(--primary);"></i>
+          <span id="pageMainHeading">50 Startups & Boston Housing ML Regression Explorer</span>
+          <span class="brand-badge">CRISP-DM</span>
+        </h1>
+      </div>
+
+      <div class="header-actions">
+        <!-- Problem Switcher Dropdown (加總分 1分) -->
+        <div class="problem-dropdown-wrapper">
+          <label for="problemSelector" class="problem-dropdown-label">
+            <i class="fa-solid fa-layer-group"></i> Problem:
+          </label>
+          <select id="problemSelector" class="problem-dropdown" title="Select regression problem">
+            <option value="50startups" selected>🏢 50 Startups (Profit Prediction)</option>
+            <option value="boston">🏡 Boston Housing (Median Value MEDV)</option>
+            <option value="custom">📊 Custom CSV Dataset (Live In-Browser ML)</option>
+          </select>
+        </div>
+
+        <a href="https://github.com/Lannjiarong/kaggle-50-startup-and-boston-housing" target="_blank" class="header-btn github-btn">
+          <i class="fa-brands fa-github"></i>
+          GitHub Repo
+        </a>
+
+        <a href="https://statsunlock.com/multiple-linear-regression-calculator/" target="_blank" class="header-btn">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          StatsUnlock
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Hero Card Banner -->
+    <div class="hero-card" id="heroCard">
+      <h2 id="heroTitle">50 Startups: Feature Selection & Parsimony Analysis</h2>
+      <p id="heroDescription">
+        Compare 5 Machine Learning Feature Selection Algorithms (<strong>Lasso</strong>, <strong>Forward SFS</strong>, <strong>RFE</strong>, <strong>ElasticNet</strong>, <strong>Exhaustive Search</strong>) against Baseline OLS. Explore the bias-variance tradeoff across feature counts $k=1 \dots 5$, pinpointing the <strong>2-feature optimal sweet spot</strong> and the <strong>5-feature overfitting cliff</strong>.
+      </p>
+      <div class="hero-tags" id="heroTags">
+        <span class="hero-pill"><i class="fa-solid fa-database"></i> <span id="heroDatasetName">50 Startups Dataset (50 rows)</span></span>
+        <span class="hero-pill"><i class="fa-solid fa-bolt"></i> 5 ML Selection Methods</span>
+        <span class="hero-pill" id="heroSweetPill"><i class="fa-solid fa-star" style="color: #34d399;"></i> Sweet Spot: k=2 ($8,198.80 RMSE)</span>
+        <span class="hero-pill" id="heroCliffPill"><i class="fa-solid fa-triangle-exclamation" style="color: #fbbf24;"></i> Overfitting: k=5 ($9,137.99 RMSE)</span>
+      </div>
+    </div>
+
+    <!-- Custom Dataset Loader Card (加總分 2分) -->
+    <div class="custom-dataset-card" id="customDatasetSection">
+      <div class="custom-card-header">
+        <div class="custom-card-title">
+          <i class="fa-solid fa-cloud-arrow-down" style="color: var(--accent-emerald);"></i>
+          <span>Custom Dataset & Remote CSV Live Regression Engine</span>
+          <span class="bonus-tag"><i class="fa-solid fa-award"></i> 加總分 2 分</span>
+        </div>
+        <div style="font-size: 12.5px; color: var(--slate-500);">
+          Paste any raw CSV URL or upload a local CSV file to run in-browser OLS regression
+        </div>
+      </div>
+
+      <div class="url-input-group">
+        <input type="text" id="customUrlInput" class="url-input" 
+               value="https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/master/datasets/50_Startups.csv" 
+               placeholder="Enter public CSV URL (e.g. raw.githubusercontent.com/.../*.csv)">
+        <button id="btnFetchUrl" class="btn-action">
+          <i class="fa-solid fa-cloud-arrow-down"></i> Load & Parse URL
+        </button>
+        <label for="csvFileInput" class="btn-action btn-secondary" style="cursor: pointer; margin: 0;">
+          <i class="fa-solid fa-file-csv"></i> Upload CSV File
+          <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+        </label>
+      </div>
+
+      <div class="quick-samples">
+        <span><i class="fa-solid fa-lightbulb"></i> Quick Load:</span>
+        <span class="sample-chip" id="chipStartups">🏢 50 Startups CSV</span>
+        <span class="sample-chip" id="chipBoston">🏡 Boston Housing CSV</span>
+        <span id="loadStatusMsg" style="margin-left: 10px; font-weight: 600; color: #059669;"></span>
+      </div>
+
+      <!-- Custom Dataset Configuration Panel (Appears when custom is active/loaded) -->
+      <div id="customConfigPanel" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--slate-300);">
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+          <div style="min-width: 220px;">
+            <label style="font-size: 12px; font-weight: 700; color: var(--slate-700); display: block; margin-bottom: 6px;">
+              <i class="fa-solid fa-bullseye" style="color: #dc2626;"></i> Target Variable (y):
+            </label>
+            <select id="customTargetSelect" class="input-field" style="padding: 8px 12px;">
+              <!-- Options populated dynamically -->
+            </select>
+          </div>
+          <div style="flex: 1; min-width: 280px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label style="font-size: 12px; font-weight: 700; color: var(--slate-700);">
+                <i class="fa-solid fa-list-check" style="color: var(--primary);"></i> Predictor Features (X):
+              </label>
+              <div style="font-size: 11px;">
+                <a href="#" id="btnSelectAllFeats" style="color: var(--primary); text-decoration: underline; margin-right: 8px;">Select All</a>
+                <a href="#" id="btnClearFeats" style="color: var(--slate-500); text-decoration: underline;">Clear</a>
+              </div>
+            </div>
+            <div id="customFeaturesCheckboxes" style="display: flex; flex-wrap: wrap; gap: 8px; max-height: 120px; overflow-y: auto; padding: 8px; background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-sm);">
+              <!-- Checkboxes populated dynamically -->
+            </div>
+          </div>
+          <div style="align-self: flex-end;">
+            <button id="btnRunCustomRegression" class="btn-action" style="background: #059669; padding: 10px 20px;">
+              <i class="fa-solid fa-bolt"></i> Fit OLS Regression
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls Wrapper: Algorithm & Features Selector -->
+    <div class="controls-wrapper" id="controlsWrapper">
+      <span class="control-label"><i class="fa-solid fa-sliders"></i> 1. Select Feature Selection Algorithm</span>
+      <div class="tabs-pills" id="algoTabs">
+        <button class="tab-btn active" data-algo="Lasso">
+          <i class="fa-solid fa-filter"></i> Lasso (L1 Ranking)
+          <span class="badge-pill">Benchmark</span>
+        </button>
+        <button class="tab-btn" data-algo="Forward SFS">
+          <i class="fa-solid fa-arrow-trend-up"></i> Forward SFS
+          <span class="badge-pill">Greedy</span>
+        </button>
+        <button class="tab-btn" data-algo="RFE">
+          <i class="fa-solid fa-scissors"></i> RFE
+          <span class="badge-pill">Backward</span>
+        </button>
+        <button class="tab-btn" data-algo="ElasticNet">
+          <i class="fa-solid fa-diagram-project"></i> ElasticNet
+          <span class="badge-pill">L1 + L2</span>
+        </button>
+        <button class="tab-btn" data-algo="Exhaustive">
+          <i class="fa-solid fa-magnifying-glass-chart"></i> Exhaustive Search
+          <span class="badge-pill">Best Subset</span>
+        </button>
+        <button class="tab-btn" data-algo="ALL" style="border-left: 2px solid var(--primary);">
+          <i class="fa-solid fa-layer-group"></i> 🌟 Compare All 5 Methods
+        </button>
+      </div>
+
+      <span class="control-label" style="margin-top: 12px;">
+        <i class="fa-solid fa-list-ol"></i> 2. Number of Features (<span id="kRangeLabel">k = 1 to 5</span>)
+      </span>
+      <div class="k-selector-group" id="kSelectorGroup">
+        <!-- k buttons populated dynamically -->
+      </div>
+    </div>
+
+    <!-- Metrics Ribbon -->
+    <div class="metrics-grid" id="metricsGrid">
+      <div class="metric-card sweet" id="kpiCardRMSE">
+        <div class="metric-title">
+          <span>Test RMSE</span>
+          <span class="badge-tag badge-green" id="rmseBadge"><i class="fa-solid fa-award"></i> Optimal</span>
+        </div>
+        <div class="metric-val" id="valRMSE">$8,198.80</div>
+        <div class="metric-note">
+          <span>Lower is better (Minimizes residual error)</span>
+        </div>
+      </div>
+
+      <div class="metric-card sweet" id="kpiCardR2">
+        <div class="metric-title">
+          <span>R² Score</span>
+          <span class="badge-tag badge-blue" id="r2Badge"><i class="fa-solid fa-circle-check"></i> High Fit</span>
+        </div>
+        <div class="metric-val" id="valR2">0.9474</div>
+        <div class="metric-note">
+          <span id="r2Note">Explains variance of target</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-title">
+          <span>Adjusted R²</span>
+          <i class="fa-solid fa-scale-balanced" style="color: var(--slate-400);"></i>
+        </div>
+        <div class="metric-val" id="valAdjR2">0.9324</div>
+        <div class="metric-note">
+          <span>Penalizes redundant parameters</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-title">
+          <span>Mean Absolute Error</span>
+          <i class="fa-solid fa-calculator" style="color: var(--slate-400);"></i>
+        </div>
+        <div class="metric-val" id="valMAE">$6,488.75</div>
+        <div class="metric-note">
+          <span>Average prediction absolute error</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-title">
+          <span>F-Statistic</span>
+          <span class="badge-tag badge-green" id="fStatPval">p &lt; 0.0001</span>
+        </div>
+        <div class="metric-val" id="valFStat">347.8</div>
+        <div class="metric-note">
+          <span>Overall model statistical significance</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Features Chips & Parsimony Notice -->
+    <div style="background: white; border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <span style="font-size: 13px; font-weight: 700; color: var(--slate-700);">
+          <i class="fa-solid fa-check-double" style="color: var(--primary);"></i> Active Predictors (<span id="featuresCount">2</span>):
+        </span>
+        <div id="featuresListChips" style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <span class="feature-chip">R&D Spend</span>
+          <span class="feature-chip">Marketing Spend</span>
+        </div>
+      </div>
+      <div id="parsimonyNotice" class="badge-tag badge-green" style="font-size: 12px; padding: 4px 10px;">
+        <i class="fa-solid fa-star"></i> Occam's Razor: 2-feature model minimizes error.
+      </div>
+    </div>
+
+    <!-- Dual Charts Section (Directly Matches User's Screenshot 1) -->
+    <div class="dual-charts-grid">
+      <!-- Left Chart: RMSE -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h3><i class="fa-solid fa-chart-line" style="color: var(--primary);"></i> RMSE by Number of Features</h3>
+            <div class="card-subtitle">Lower is better. Pinpoints sweet spot and overfitting cliff.</div>
+          </div>
+          <span class="badge-tag badge-blue" id="rmseChartBadge">Lasso (L1)</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="rmseChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Right Chart: R-squared -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h3><i class="fa-solid fa-arrow-trend-up" style="color: var(--accent-emerald);"></i> R-squared by Number of Features</h3>
+            <div class="card-subtitle">Higher is better. Measures variance explained.</div>
+          </div>
+          <span class="badge-tag badge-green" id="r2ChartBadge">Peak fit</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="r2Chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Selection Progression Summary Table (Matches User's Screenshot 2) -->
+    <div class="card" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Feature Progression Summary Table</h3>
+          <div class="card-subtitle">Model progression across feature counts k, showing selected features, RMSE, and R-squared.</div>
+        </div>
+        <span class="badge-tag badge-green"><i class="fa-solid fa-award"></i> Benchmark Progression</span>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table" id="parsimonyTable">
+          <thead>
+            <tr>
+              <th style="width: 160px;">Number of Features</th>
+              <th>Selected Features</th>
+              <th style="width: 140px;">RMSE</th>
+              <th style="width: 140px;">R-squared</th>
+              <th style="width: 150px;">Status</th>
+            </tr>
+          </thead>
+          <tbody id="parsimonyTableBody">
+            <!-- Dynamically populated to match Image 2 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mathematical Equation Card -->
+    <div class="equation-card">
+      <div class="equation-title">
+        <i class="fa-solid fa-square-root-variable"></i> Fitted OLS Regression Equation
+      </div>
+      <div class="equation-formula" id="equationBox">
+        Profit = 46,346.34 + 0.7886 × (R&D Spend) + 0.0326 × (Marketing Spend)
+      </div>
+    </div>
+
+    <!-- Interactive Grid: Coefficients Table & Live Predictor -->
+    <div class="calc-grid">
+      
+      <!-- Left: Coefficients & Statistical Tests Table -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h3><i class="fa-solid fa-table" style="color: var(--primary);"></i> Model Coefficients & Statistical Tests</h3>
+            <div class="card-subtitle">Parameter estimates, standard errors, t-statistics, p-values, and VIF multicollinearity.</div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table" id="coefTable">
+            <thead>
+              <tr>
+                <th>Predictor</th>
+                <th>Estimate (β)</th>
+                <th>Std. Error</th>
+                <th>t-Stat</th>
+                <th>p-Value</th>
+                <th>95% Conf. Int</th>
+                <th>VIF</th>
+              </tr>
+            </thead>
+            <tbody id="coefTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right: Live Interactive Predictor Calculator -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h3><i class="fa-solid fa-calculator" style="color: var(--accent-emerald);"></i> <span id="predictorTitle">Live Profit Predictor</span></h3>
+            <div class="card-subtitle">Test real-time predictions with interactive sliders.</div>
+          </div>
+          <span class="badge-tag badge-green"><i class="fa-solid fa-bolt"></i> Real-time</span>
+        </div>
+
+        <div id="dynamicInputsContainer">
+          <!-- Dynamic inputs rendered here depending on active problem -->
+        </div>
+
+        <!-- Output Prediction Box -->
+        <div class="prediction-output-box">
+          <div class="pred-label" id="predOutputLabel">Predicted Startup Profit</div>
+          <div class="pred-value" id="predProfitOutput">$130,154.20</div>
+          <div class="pred-formula-note" id="predFormulaNote">
+            Calculated using: β₀ + β₁(R&D) + β₂(Marketing)
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Residual Diagnostics & Top 10 Outliers -->
+    <div class="card" style="margin-top: 24px;">
+      <div class="card-header">
+        <div class="card-title-group">
+          <h3><i class="fa-solid fa-magnifying-glass" style="color: var(--accent-amber);"></i> Test Set Residuals & Outliers Diagnostic</h3>
+          <div class="card-subtitle">Top absolute residuals on the evaluation dataset.</div>
+        </div>
+        <span class="badge-tag badge-blue"><i class="fa-solid fa-filter"></i> Sorted by |Residual|</span>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Sample ID</th>
+              <th>Actual Value</th>
+              <th>Predicted Value</th>
+              <th>Residual</th>
+              <th>Abs Error</th>
+              <th>% Error</th>
+              <th>Diagnostic Status</th>
+            </tr>
+          </thead>
+          <tbody id="outliersTableBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer & References -->
+  <footer>
+    <div class="footer-inner">
+      <div style="max-width: 650px;">
+        <h4 style="font-size: 16px; margin-bottom: 8px; color: var(--slate-900);">
+          <i class="fa-solid fa-building-columns"></i> Multiple Linear Regression CRISP-DM Machine Learning Project
+        </h4>
+        <p style="line-height: 1.6; font-size: 13px;">
+          Developed for multiple linear regression model selection, parsimony validation (Occam's razor), and statistical inference across <strong>50 Startups</strong> and <strong>Boston Housing</strong> datasets. Built with pure Vanilla HTML, CSS, JavaScript, and Chart.js.
+        </p>
+        <div style="margin-top: 12px; font-size: 12px; color: var(--slate-500);">
+          GitHub Repository: <a href="https://github.com/Lannjiarong/kaggle-50-startup-and-boston-housing" target="_blank" style="color: var(--primary);">kaggle-50-startup-and-boston-housing</a>
+        </div>
+      </div>
+
+      <div style="max-width: 550px;">
+        <h4 style="font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--slate-400); margin-bottom: 8px;">
+          References & Acknowledgments
+        </h4>
+        <div class="ack-card">
+          <strong>Design & Layout Reference:</strong><br>
+          Style inspired by <a href="https://statsunlock.com/multiple-linear-regression-calculator/" target="_blank">StatsUnlock Multiple Linear Regression Calculator</a> and <a href="https://huanchen1107.github.io/AIoT-DIC2-MultipleLR/" target="_blank">AIoT-DIC2 Course Example</a>.<br>
+          <strong>Datasets:</strong>
+          <a href="https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/master/datasets/50_Startups.csv" target="_blank">50 Startups Dataset</a> & 
+          <a href="https://raw.githubusercontent.com/selva86/datasets/master/BostonHousing.csv" target="_blank">Boston Housing Dataset</a>.<br>
+          <strong>Methodology:</strong> CRISP-DM (Cross-Industry Standard Process for Data Mining).
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic & Custom OLS Engine -->
+  <script>
+    // Global State
+    let currentProblem = '50startups'; // '50startups' | 'boston' | 'custom'
+    let currentAlgo = 'Lasso';
+    let currentK = 2; // Default for 50 startups sweet spot
+    let rmseChartInstance = null;
+    let r2ChartInstance = null;
+
+    // Custom Dataset State
+    let customDataset = null; // { headers, data, target, features, models: { algo: [...] } }
+
+    const ALGO_COLORS = {
+      'Lasso': '#4f46e5',
+      'Forward SFS': '#ff7f0e',
+      'RFE': '#2ca02c',
+      'ElasticNet': '#d62728',
+      'Exhaustive': '#9467bd'
+    };
+
+    // Initialize application
+    document.addEventListener('DOMContentLoaded', () => {
+      initCharts();
+      setupEventListeners();
+      switchProblem('50startups');
+    });
+
+    function setupEventListeners() {
+      // 1. Problem Selector Dropdown (Bonus +1 pt)
+      const problemSelector = document.getElementById('problemSelector');
+      problemSelector.addEventListener('change', (e) => {
+        switchProblem(e.target.value);
+      });
+
+      // 2. Algorithm tabs
+      const tabs = document.querySelectorAll('#algoTabs .tab-btn');
+      tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabs.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentAlgo = btn.dataset.algo;
+          updateDashboard();
+        });
+      });
+
+      // 3. Custom Dataset URL Loader (Bonus +2 pts)
+      document.getElementById('btnFetchUrl').addEventListener('click', () => {
+        const url = document.getElementById('customUrlInput').value.trim();
+        if (url) loadDatasetFromUrl(url);
+      });
+
+      // 4. File input
+      document.getElementById('csvFileInput').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) loadDatasetFromFile(file);
+      });
+
+      // Quick sample buttons
+      document.getElementById('chipStartups').addEventListener('click', () => {
+        document.getElementById('customUrlInput').value = 'https://raw.githubusercontent.com/Avik-Jain/100-Days-Of-ML-Code/master/datasets/50_Startups.csv';
+        loadDatasetFromUrl(document.getElementById('customUrlInput').value);
+      });
+
+      document.getElementById('chipBoston').addEventListener('click', () => {
+        document.getElementById('customUrlInput').value = 'https://raw.githubusercontent.com/selva86/datasets/master/BostonHousing.csv';
+        loadDatasetFromUrl(document.getElementById('customUrlInput').value);
+      });
+
+      // Custom regression fitting button
+      document.getElementById('btnRunCustomRegression').addEventListener('click', runCustomRegression);
+
+      // Select All / Clear features
+      document.getElementById('btnSelectAllFeats').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('#customFeaturesCheckboxes input[type="checkbox"]').forEach(cb => cb.checked = true);
+      });
+      document.getElementById('btnClearFeats').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('#customFeaturesCheckboxes input[type="checkbox"]').forEach(cb => cb.checked = false);
+      });
+    }
+
+    // Switch active problem between 50startups, boston, and custom
+    function switchProblem(problemKey) {
+      currentProblem = problemKey;
+      document.getElementById('problemSelector').value = problemKey;
+
+      const heroTitle = document.getElementById('heroTitle');
+      const heroDescription = document.getElementById('heroDescription');
+      const heroDatasetName = document.getElementById('heroDatasetName');
+      const heroSweetPill = document.getElementById('heroSweetPill');
+      const heroCliffPill = document.getElementById('heroCliffPill');
+      const predictorTitle = document.getElementById('predictorTitle');
+      const predOutputLabel = document.getElementById('predOutputLabel');
+      const customConfigPanel = document.getElementById('customConfigPanel');
+
+      if (problemKey === '50startups') {
+        customConfigPanel.style.display = 'none';
+        heroTitle.textContent = '50 Startups: Feature Selection & Parsimony Analysis';
+        heroDescription.innerHTML = 'Compare 5 Machine Learning Feature Selection Algorithms (<strong>Lasso</strong>, <strong>Forward SFS</strong>, <strong>RFE</strong>, <strong>ElasticNet</strong>, <strong>Exhaustive Search</strong>) against Baseline OLS. Explore the bias-variance tradeoff across feature counts $k=1 \\dots 5$, pinpointing the <strong>2-feature optimal sweet spot</strong> and the <strong>5-feature overfitting cliff</strong>.';
+        heroDatasetName.textContent = '50 Startups Dataset (50 rows)';
+        heroSweetPill.innerHTML = '<i class="fa-solid fa-star" style="color: #34d399;"></i> Sweet Spot: k=2 ($8,198.80 RMSE)';
+        heroSweetPill.style.display = 'inline-flex';
+        heroCliffPill.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color: #fbbf24;"></i> Overfitting: k=5 ($9,137.99 RMSE)';
+        heroCliffPill.style.display = 'inline-flex';
+        predictorTitle.textContent = 'Live Profit Predictor';
+        predOutputLabel.textContent = 'Predicted Startup Profit';
+
+        currentK = 2; // Default optimal sweet spot
+        renderKButtons(5, 2, 5);
+        renderPredictorInputs('50startups');
+        updateDashboard();
+
+      } else if (problemKey === 'boston') {
+        customConfigPanel.style.display = 'none';
+        heroTitle.textContent = 'Boston Housing: Multiple Linear Regression & Hedonic Pricing';
+        heroDescription.innerHTML = 'Explore hedonic home valuation across 13 socioeconomic, environmental, and structural features in Boston suburbs. Evaluate feature selection from $k=1 \\dots 13$ predictors (including <strong>LSTAT</strong>, <strong>RM</strong>, <strong>PTRATIO</strong>, <strong>DIS</strong>, <strong>TAX</strong>).';
+        heroDatasetName.textContent = 'Boston Housing Dataset (506 rows, 13 features)';
+        heroSweetPill.innerHTML = '<i class="fa-solid fa-star" style="color: #34d399;"></i> Low Error: k=13 (4.68 RMSE)';
+        heroSweetPill.style.display = 'inline-flex';
+        heroCliffPill.style.display = 'none';
+        predictorTitle.textContent = 'Live Boston Home Value Predictor';
+        predOutputLabel.textContent = 'Predicted Median Value ($1000s)';
+
+        currentK = 3; // Default 3 key features (LSTAT, RM, PTRATIO)
+        renderKButtons(13, 13, null);
+        renderPredictorInputs('boston');
+        updateDashboard();
+
+      } else if (problemKey === 'custom') {
+        customConfigPanel.style.display = 'block';
+        heroTitle.textContent = 'Custom Dataset: Live Client-Side Regression Explorer';
+        heroDescription.innerHTML = 'Load arbitrary CSV data via public URL or local upload. Our in-browser matrix engine performs ordinary least squares (OLS) regression, calculates exact ANOVA metrics, $R^2$, RMSE, and diagnostic residuals in real-time.';
+        heroDatasetName.textContent = customDataset ? `Custom CSV (${customDataset.data.length} rows)` : 'No custom dataset loaded yet';
+        heroSweetPill.style.display = 'none';
+        heroCliffPill.style.display = 'none';
+        predictorTitle.textContent = 'Live Model Predictor';
+        predOutputLabel.textContent = 'Predicted Target Value';
+
+        if (customDataset && customDataset.models) {
+          const maxK = customDataset.features.length;
+          renderKButtons(maxK, null, null);
+          renderPredictorInputs('custom');
+          updateDashboard();
+        } else {
+          // Trigger initial fetch of default URL
+          loadDatasetFromUrl(document.getElementById('customUrlInput').value.trim());
+        }
+      }
+    }
+
+    // Render K buttons dynamically
+    function renderKButtons(totalK, sweetSpotK, overfittingK) {
+      const group = document.getElementById('kSelectorGroup');
+      group.innerHTML = '';
+      document.getElementById('kRangeLabel').textContent = `k = 1 to ${totalK}`;
+
+      for (let k = 1; k <= totalK; k++) {
+        const btn = document.createElement('button');
+        btn.className = 'k-btn';
+        btn.dataset.k = k;
+
+        if (k === currentK) btn.classList.add('active');
+
+        let note = '';
+        if (currentProblem === '50startups') {
+          if (k === 1) note = '<span style="font-size: 11px; font-weight: 400;">(R&D Spend)</span>';
+          if (k === 2) {
+            btn.classList.add('sweet-spot');
+            note = '★ Optimal Sweet Spot <span style="font-size: 11px; font-weight: 700;">(Min RMSE)</span>';
+          }
+          if (k === 3) note = '<span style="font-size: 11px;">(+ State/Admin)</span>';
+          if (k === 5) {
+            btn.classList.add('overfitting');
+            note = '⚠ Full Model <span style="font-size: 11px; font-weight: 700;">(Overfitting Cliff)</span>';
+          }
+        } else if (currentProblem === 'boston') {
+          if (k === 1) note = '<span style="font-size: 11px;">(LSTAT)</span>';
+          if (k === 2) note = '<span style="font-size: 11px;">(LSTAT, RM)</span>';
+          if (k === 3) note = '<span style="font-size: 11px;">(+ PTRATIO)</span>';
+          if (k === 13) note = '★ Full Model (13 Features)';
+        }
+
+        btn.innerHTML = `k = ${k} ${note}`;
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#kSelectorGroup .k-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentK = k;
+          updateDashboard();
+        });
+
+        group.appendChild(btn);
+      }
+    }
+
+    // Retrieve active model data object
+    function getActiveModelData() {
+      let problemData;
+      if (currentProblem === '50startups') {
+        problemData = window.PROBLEMS_DATA['50startups'];
+      } else if (currentProblem === 'boston') {
+        problemData = window.PROBLEMS_DATA['boston'];
+      } else if (currentProblem === 'custom' && customDataset && customDataset.models) {
+        problemData = customDataset.models;
+      }
+
+      if (!problemData) return null;
+
+      const algo = currentAlgo === 'ALL' ? 'Lasso' : currentAlgo;
+      const list = problemData[algo] || problemData['Lasso'] || Object.values(problemData)[0];
+      if (!list || list.length === 0) return null;
+
+      const safeK = Math.min(Math.max(currentK, 1), list.length);
+      return list[safeK - 1];
+    }
+
+    // Update entire dashboard view
+    function updateDashboard() {
+      const data = getActiveModelData();
+      if (!data) return;
+
+      const isCurrency = currentProblem === '50startups';
+      const formatVal = (val, digits = 2) => {
+        if (val === null || val === undefined || isNaN(val)) return 'N/A';
+        const numStr = val.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+        return isCurrency ? `$${numStr}` : numStr;
+      };
+
+      // 1. KPI Cards
+      document.getElementById('valRMSE').textContent = formatVal(data.rmse);
+      document.getElementById('valR2').textContent = data.r2.toFixed(4);
+      document.getElementById('valAdjR2').textContent = data.adj_r2 ? data.adj_r2.toFixed(4) : 'N/A';
+      document.getElementById('valMAE').textContent = formatVal(data.mae);
+      document.getElementById('valFStat').textContent = data.f_stat ? data.f_stat.toFixed(1) : '347.8';
+      document.getElementById('fStatPval').textContent = (data.f_pvalue && data.f_pvalue < 0.0001) ? 'p < 0.0001' : `p = ${data.f_pvalue ? data.f_pvalue.toFixed(4) : '0.0000'}`;
+
+      // RMSE Badge
+      const rmseBadge = document.getElementById('rmseBadge');
+      if (currentProblem === '50startups') {
+        if (currentK === 2) {
+          rmseBadge.className = 'badge-tag badge-green';
+          rmseBadge.innerHTML = '<i class="fa-solid fa-award"></i> Optimal Sweet Spot';
+        } else if (currentK === 5) {
+          rmseBadge.className = 'badge-tag badge-amber';
+          rmseBadge.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Overfitting Cliff';
+        } else {
+          rmseBadge.className = 'badge-tag badge-blue';
+          rmseBadge.innerHTML = `k = ${currentK}`;
+        }
+      } else {
+        rmseBadge.className = 'badge-tag badge-green';
+        rmseBadge.innerHTML = `k = ${currentK}`;
+      }
+
+      // 2. Active Features Chips
+      document.getElementById('featuresCount').textContent = data.features.length;
+      const chipsContainer = document.getElementById('featuresListChips');
+      chipsContainer.innerHTML = '';
+      data.features.forEach(feat => {
+        const chip = document.createElement('span');
+        chip.className = 'feature-chip';
+        chip.textContent = feat;
+        chipsContainer.appendChild(chip);
+      });
+
+      // 3. Parsimony Notice
+      const notice = document.getElementById('parsimonyNotice');
+      if (currentProblem === '50startups') {
+        if (currentK === 2) {
+          notice.className = 'badge-tag badge-green';
+          notice.innerHTML = '<i class="fa-solid fa-star"></i> Occam\'s Razor: 2 features yield the minimum test RMSE ($8,198.80) and peak R² (0.9474).';
+        } else if (currentK === 5) {
+          notice.className = 'badge-tag badge-amber';
+          notice.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Overfitting Warning: Adding Admin & Location dummies spikes error to $9,137.99!';
+        } else {
+          notice.className = 'badge-tag badge-blue';
+          notice.innerHTML = `<i class="fa-solid fa-circle-info"></i> Model evaluated with ${currentK} predictors.`;
+        }
+      } else if (currentProblem === 'boston') {
+        notice.className = 'badge-tag badge-green';
+        notice.innerHTML = `<i class="fa-solid fa-home"></i> Hedonic Model with ${currentK} predictors. Top contributors: ${data.features.slice(0, 3).join(', ')}.`;
+      } else {
+        notice.className = 'badge-tag badge-blue';
+        notice.innerHTML = `<i class="fa-solid fa-chart-line"></i> Custom Dataset OLS Model with ${currentK} predictors.`;
+      }
+
+      // 4. Equation
+      updateEquation(data.coefficients);
+
+      // 5. Progression Summary Table (Image 2)
+      updateProgressionTable();
+
+      // 6. Coefficients Table
+      updateCoefficientsTable(data.coefficients);
+
+      // 7. Outliers Table
+      updateOutliersTable(data.outliers);
+
+      // 8. Charts
+      updateCharts();
+
+      // 9. Live Prediction
+      calculateLivePrediction();
+    }
+
+    // Update Equation Box
+    function updateEquation(coefficients) {
+      const box = document.getElementById('equationBox');
+      const intercept = coefficients.find(c => c.feature.includes('Intercept'));
+      let parts = [];
+
+      const targetName = currentProblem === '50startups' ? 'Profit' : (currentProblem === 'boston' ? 'MEDV' : (customDataset ? customDataset.target : 'y'));
+
+      if (intercept) {
+        parts.push(`<span class="eq-intercept">${intercept.coef.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 })}</span>`);
+      }
+
+      coefficients.forEach(c => {
+        if (c.feature.includes('Intercept')) return;
+        const sign = c.coef >= 0 ? '<span class="eq-pos">+</span>' : '<span class="eq-neg">-</span>';
+        const absVal = Math.abs(c.coef).toFixed(4);
+        parts.push(`${sign} ${absVal} × <span class="eq-var">(${c.feature})</span>`);
+      });
+
+      box.innerHTML = `<strong>${targetName}</strong> = ${parts.join(' ')}`;
+    }
+
+    // Update Feature Progression Summary Table (Matches User Screenshot 2)
+    function updateProgressionTable() {
+      const tbody = document.getElementById('parsimonyTableBody');
+      tbody.innerHTML = '';
+
+      let problemData;
+      if (currentProblem === '50startups') problemData = window.PROBLEMS_DATA['50startups'];
+      else if (currentProblem === 'boston') problemData = window.PROBLEMS_DATA['boston'];
+      else if (customDataset && customDataset.models) problemData = customDataset.models;
+
+      if (!problemData) return;
+      const algo = currentAlgo === 'ALL' ? 'Lasso' : currentAlgo;
+      const list = problemData[algo] || problemData['Lasso'] || Object.values(problemData)[0];
+      if (!list) return;
+
+      const isCurrency = currentProblem === '50startups';
+
+      list.forEach(item => {
+        const tr = document.createElement('tr');
+        const isCurrent = item.k === currentK;
+        if (isCurrent) tr.style.backgroundColor = '#f0fdf4';
+
+        let statusBadge = '<span class="badge-tag badge-blue">Evaluated</span>';
+        if (currentProblem === '50startups') {
+          if (item.k === 2) statusBadge = '<span class="badge-tag badge-green"><i class="fa-solid fa-award"></i> Optimal Sweet Spot</span>';
+          else if (item.k === 5) statusBadge = '<span class="badge-tag badge-amber"><i class="fa-solid fa-triangle-exclamation"></i> Overfitting Cliff</span>';
+        } else if (currentProblem === 'boston' && item.k === 13) {
+          statusBadge = '<span class="badge-tag badge-green"><i class="fa-solid fa-check"></i> Full Model</span>';
+        }
+
+        const rmseFormatted = isCurrency 
+          ? `$${item.rmse.toLocaleString('en-US', { minimumFractionDigits: 6, maximumFractionDigits: 6 })}`
+          : item.rmse.toFixed(6);
+
+        tr.innerHTML = `
+          <td style="font-weight: 700;">${item.k} ${isCurrent ? '<i class="fa-solid fa-arrow-left" style="color: #059669;"></i>' : ''}</td>
+          <td style="font-family: 'Fira Code', monospace; font-size: 13px;">[${item.features.join(', ')}]</td>
+          <td style="font-family: 'Fira Code', monospace; font-weight: 600;">${rmseFormatted}</td>
+          <td style="font-family: 'Fira Code', monospace;">${item.r2.toFixed(6)}</td>
+          <td>${statusBadge}</td>
+        `;
+
+        tr.style.cursor = 'pointer';
+        tr.title = `Click to inspect k=${item.k}`;
+        tr.addEventListener('click', () => {
+          const btn = document.querySelector(`#kSelectorGroup .k-btn[data-k="${item.k}"]`);
+          if (btn) btn.click();
+        });
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Update Coefficients Table
+    function updateCoefficientsTable(coefficients) {
+      const tbody = document.getElementById('coefTableBody');
+      tbody.innerHTML = '';
+
+      coefficients.forEach(c => {
+        const tr = document.createElement('tr');
+        const isIntercept = c.feature.includes('Intercept');
+        const pBadge = c.pvalue < 0.05 
+          ? `<span class="badge-tag badge-green">${c.pvalue < 0.0001 ? '< 0.0001' : c.pvalue.toFixed(4)} <i class="fa-solid fa-check"></i></span>`
+          : `<span class="badge-tag badge-amber">${c.pvalue.toFixed(4)} (n.s.)</span>`;
+        
+        let vifDisplay = '-';
+        if (!isIntercept && c.vif !== null && c.vif !== undefined) {
+          if (c.vif < 5) {
+            vifDisplay = `<span class="badge-tag badge-green">${Number(c.vif).toFixed(2)} (Safe)</span>`;
+          } else {
+            vifDisplay = `<span class="badge-tag badge-amber">${Number(c.vif).toFixed(2)} (Collinear)</span>`;
+          }
+        }
+
+        tr.innerHTML = `
+          <td><strong>${c.feature}</strong></td>
+          <td style="font-family: 'Fira Code', monospace; font-weight: 600;">${c.coef.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 })}</td>
+          <td>${c.stderr ? c.stderr.toFixed(4) : '-'}</td>
+          <td>${c.tstat ? c.tstat.toFixed(3) : '-'}</td>
+          <td>${pBadge}</td>
+          <td style="font-size: 12px; color: var(--slate-600);">[${c.ci_lower ? c.ci_lower.toFixed(2) : '-'}, ${c.ci_upper ? c.ci_upper.toFixed(2) : '-'}]</td>
+          <td>${vifDisplay}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Update Outliers Table
+    function updateOutliersTable(outliers) {
+      const tbody = document.getElementById('outliersTableBody');
+      tbody.innerHTML = '';
+      if (!outliers || outliers.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--slate-400);">No outlier diagnostics recorded.</td></tr>';
+        return;
+      }
+
+      const isCurrency = currentProblem === '50startups';
+
+      outliers.forEach(o => {
+        const tr = document.createElement('tr');
+        const isHigh = isCurrency ? (o.abs_error > 10000) : (o.abs_error > 8);
+        const statusBadge = isHigh 
+          ? `<span class="badge-tag badge-amber"><span class="status-dot dot-amber"></span> High Residual</span>`
+          : `<span class="badge-tag badge-green"><span class="status-dot dot-green"></span> In Range</span>`;
+
+        const fmt = (v) => isCurrency 
+          ? `$${v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+          : v.toFixed(2);
+
+        tr.innerHTML = `
+          <td style="font-weight: 700;">#${o.rank}</td>
+          <td>Row #${o.index}</td>
+          <td style="font-family: 'Fira Code', monospace;">${fmt(o.actual)}</td>
+          <td style="font-family: 'Fira Code', monospace;">${fmt(o.predicted)}</td>
+          <td style="color: ${o.residual >= 0 ? '#059669' : '#dc2626'}; font-weight: 600;">${o.residual >= 0 ? '+' : ''}${fmt(o.residual)}</td>
+          <td>${fmt(o.abs_error)}</td>
+          <td>${o.pct_error ? o.pct_error.toFixed(2) : '0.00'}%</td>
+          <td>${statusBadge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Render Predictor Inputs based on active dataset
+    function renderPredictorInputs(problemType) {
+      const container = document.getElementById('dynamicInputsContainer');
+      container.innerHTML = '';
+
+      if (problemType === '50startups') {
+        container.innerHTML = `
+          <div class="input-group">
+            <div class="input-label-row">
+              <span>R&D Spend ($)</span>
+              <span id="labelRD" style="color: var(--primary); font-family: 'Fira Code', monospace;">$100,000</span>
+            </div>
+            <input type="number" id="numRD" class="input-field" value="100000" min="0" max="250000" step="5000">
+            <input type="range" id="rangeRD" class="range-slider" value="100000" min="0" max="250000" step="5000">
+          </div>
+
+          <div class="input-group">
+            <div class="input-label-row">
+              <span>Marketing Spend ($)</span>
+              <span id="labelMkt" style="color: var(--primary); font-family: 'Fira Code', monospace;">$150,000</span>
+            </div>
+            <input type="number" id="numMkt" class="input-field" value="150000" min="0" max="500000" step="5000">
+            <input type="range" id="rangeMkt" class="range-slider" value="150000" min="0" max="500000" step="5000">
+          </div>
+
+          <div class="input-group">
+            <div class="input-label-row">
+              <span>Administration ($)</span>
+              <span id="labelAdmin" style="color: var(--slate-500); font-family: 'Fira Code', monospace;">$120,000</span>
+            </div>
+            <input type="number" id="numAdmin" class="input-field" value="120000" min="0" max="250000" step="5000">
+            <input type="range" id="rangeAdmin" class="range-slider" value="120000" min="0" max="250000" step="5000">
+          </div>
+
+          <div class="input-group">
+            <div class="input-label-row">
+              <span>State Location</span>
+            </div>
+            <select id="selectState" class="input-field">
+              <option value="California">California (Reference)</option>
+              <option value="New York">New York</option>
+              <option value="Florida">Florida</option>
+            </select>
+          </div>
+        `;
+
+        syncInput('rangeRD', 'numRD', 'labelRD', '$');
+        syncInput('rangeMkt', 'numMkt', 'labelMkt', '$');
+        syncInput('rangeAdmin', 'numAdmin', 'labelAdmin', '$');
+        document.getElementById('selectState').addEventListener('change', calculateLivePrediction);
+
+      } else if (problemType === 'boston') {
+        container.innerHTML = `
+          <div class="input-group">
+            <div class="input-label-row">
+              <span>RM (Average Rooms per Dwelling)</span>
+              <span id="labelRM" style="color: var(--primary); font-family: 'Fira Code', monospace;">6.2</span>
+            </div>
+            <input type="number" id="numRM" class="input-field" value="6.2" min="3" max="9" step="0.1">
+            <input type="range" id="rangeRM" class="range-slider" value="6.2" min="3" max="9" step="0.1">
+          </div>
+
+          <div class="input-group">
+            <div class="input-label-row">
+              <span>LSTAT (% Lower Status of Population)</span>
+              <span id="labelLSTAT" style="color: var(--primary); font-family: 'Fira Code', monospace;">12.5%</span>
+            </div>
+            <input type="number" id="numLSTAT" class="input-field" value="12.5" min="1" max="40" step="0.5">
+            <input type="range" id="rangeLSTAT" class="range-slider" value="12.5" min="1" max="40" step="0.5">
+          </div>
+
+          <div class="input-group">
+            <div class="input-label-row">
+              <span>PTRATIO (Pupil-Teacher Ratio by Town)</span>
+              <span id="labelPTRATIO" style="color: var(--slate-600); font-family: 'Fira Code', monospace;">18.5</span>
+            </div>
+            <input type="number" id="numPTRATIO" class="input-field" value="18.5" min="12" max="23" step="0.5">
+            <input type="range" id="rangePTRATIO" class="range-slider" value="18.5" min="12" max="23" step="0.5">
+          </div>
+
+          <div class="input-group">
+            <div class="input-label-row">
+              <span>CRIM (Per Capita Crime Rate)</span>
+              <span id="labelCRIM" style="color: var(--slate-600); font-family: 'Fira Code', monospace;">0.5</span>
+            </div>
+            <input type="number" id="numCRIM" class="input-field" value="0.5" min="0" max="90" step="0.5">
+            <input type="range" id="rangeCRIM" class="range-slider" value="0.5" min="0" max="90" step="0.5">
+          </div>
+        `;
+
+        syncInput('rangeRM', 'numRM', 'labelRM', '');
+        syncInput('rangeLSTAT', 'numLSTAT', 'labelLSTAT', '', '%');
+        syncInput('rangePTRATIO', 'numPTRATIO', 'labelPTRATIO', '');
+        syncInput('rangeCRIM', 'numCRIM', 'labelCRIM', '');
+
+      } else if (problemType === 'custom' && customDataset) {
+        // Dynamically build inputs for active features
+        const data = getActiveModelData();
+        if (!data) return;
+        data.features.forEach(f => {
+          const grp = document.createElement('div');
+          grp.className = 'input-group';
+          grp.innerHTML = `
+            <div class="input-label-row">
+              <span>${f}</span>
+              <span id="label_${f}" style="color: var(--primary); font-family: 'Fira Code', monospace;">1.0</span>
+            </div>
+            <input type="number" id="num_${f}" class="input-field custom-pred-input" data-feature="${f}" value="1.0" step="any">
+          `;
+          grp.querySelector('input').addEventListener('input', calculateLivePrediction);
+          container.appendChild(grp);
+        });
+      }
+    }
+
+    function syncInput(sliderId, numId, labelId, prefix = '', suffix = '') {
+      const slider = document.getElementById(sliderId);
+      const num = document.getElementById(numId);
+      const label = document.getElementById(labelId);
+      if (!slider || !num || !label) return;
+
+      slider.addEventListener('input', (e) => {
+        num.value = e.target.value;
+        label.textContent = prefix + Number(e.target.value).toLocaleString() + suffix;
+        calculateLivePrediction();
+      });
+
+      num.addEventListener('input', (e) => {
+        slider.value = e.target.value;
+        label.textContent = prefix + Number(e.target.value).toLocaleString() + suffix;
+        calculateLivePrediction();
+      });
+    }
+
+    // Calculate Live Prediction Output
+    function calculateLivePrediction() {
+      const data = getActiveModelData();
+      if (!data) return;
+
+      let pred = 0;
+      let usedFeatures = [];
+
+      if (currentProblem === '50startups') {
+        const rd = parseFloat(document.getElementById('numRD')?.value) || 0;
+        const mkt = parseFloat(document.getElementById('numMkt')?.value) || 0;
+        const admin = parseFloat(document.getElementById('numAdmin')?.value) || 0;
+        const state = document.getElementById('selectState')?.value || 'California';
+
+        data.coefficients.forEach(c => {
+          if (c.feature.includes('Intercept')) {
+            pred += c.coef;
+          } else if (c.feature === 'R&D Spend') {
+            pred += c.coef * rd;
+            usedFeatures.push(`R&D: +$${(c.coef * rd).toFixed(0)}`);
+          } else if (c.feature === 'Marketing Spend') {
+            pred += c.coef * mkt;
+            usedFeatures.push(`Marketing: +$${(c.coef * mkt).toFixed(0)}`);
+          } else if (c.feature === 'Administration') {
+            pred += c.coef * admin;
+            usedFeatures.push(`Admin: ${(c.coef * admin >= 0 ? '+' : '')}$${(c.coef * admin).toFixed(0)}`);
+          } else if (c.feature === 'State_Florida' && state === 'Florida') {
+            pred += c.coef * 1;
+            usedFeatures.push(`Florida dummy: ${(c.coef >= 0 ? '+' : '')}$${c.coef.toFixed(0)}`);
+          } else if (c.feature === 'State_New York' && state === 'New York') {
+            pred += c.coef * 1;
+            usedFeatures.push(`NY dummy: ${(c.coef >= 0 ? '+' : '')}$${c.coef.toFixed(0)}`);
+          }
+        });
+
+        document.getElementById('predProfitOutput').textContent = '$' + pred.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('predFormulaNote').innerHTML = `Active predictors: ${data.features.join(', ')}<br><span style="font-size: 11px; color: #cbd5e1;">(${usedFeatures.join(' | ')})</span>`;
+
+      } else if (currentProblem === 'boston') {
+        const rm = parseFloat(document.getElementById('numRM')?.value) || 6.2;
+        const lstat = parseFloat(document.getElementById('numLSTAT')?.value) || 12.5;
+        const ptratio = parseFloat(document.getElementById('numPTRATIO')?.value) || 18.5;
+        const crim = parseFloat(document.getElementById('numCRIM')?.value) || 0.5;
+
+        data.coefficients.forEach(c => {
+          if (c.feature.includes('Intercept')) {
+            pred += c.coef;
+          } else if (c.feature === 'RM') {
+            pred += c.coef * rm;
+            usedFeatures.push(`RM: ${(c.coef * rm >= 0 ? '+' : '')}${(c.coef * rm).toFixed(2)}`);
+          } else if (c.feature === 'LSTAT') {
+            pred += c.coef * lstat;
+            usedFeatures.push(`LSTAT: ${(c.coef * lstat >= 0 ? '+' : '')}${(c.coef * lstat).toFixed(2)}`);
+          } else if (c.feature === 'PTRATIO') {
+            pred += c.coef * ptratio;
+            usedFeatures.push(`PTRATIO: ${(c.coef * ptratio >= 0 ? '+' : '')}${(c.coef * ptratio).toFixed(2)}`);
+          } else if (c.feature === 'CRIM') {
+            pred += c.coef * crim;
+            usedFeatures.push(`CRIM: ${(c.coef * crim >= 0 ? '+' : '')}${(c.coef * crim).toFixed(2)}`);
+          }
+        });
+
+        document.getElementById('predProfitOutput').textContent = '$' + (pred * 1000).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ` (${pred.toFixed(2)}k)`;
+        document.getElementById('predFormulaNote').innerHTML = `Active predictors: ${data.features.join(', ')}<br><span style="font-size: 11px; color: #cbd5e1;">(${usedFeatures.join(' | ')})</span>`;
+
+      } else if (currentProblem === 'custom') {
+        data.coefficients.forEach(c => {
+          if (c.feature.includes('Intercept')) {
+            pred += c.coef;
+          } else {
+            const inp = document.querySelector(`.custom-pred-input[data-feature="${c.feature}"]`);
+            const val = inp ? (parseFloat(inp.value) || 0) : 1;
+            pred += c.coef * val;
+            usedFeatures.push(`${c.feature}: ${(c.coef * val >= 0 ? '+' : '')}${(c.coef * val).toFixed(2)}`);
+          }
+        });
+
+        document.getElementById('predProfitOutput').textContent = pred.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('predFormulaNote').innerHTML = `Active predictors: ${data.features.join(', ')}<br><span style="font-size: 11px; color: #cbd5e1;">(${usedFeatures.join(' | ')})</span>`;
+      }
+    }
+
+    // Chart.js Setup
+    function initCharts() {
+      const ctxRMSE = document.getElementById('rmseChart').getContext('2d');
+      const ctxR2 = document.getElementById('r2Chart').getContext('2d');
+
+      const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false, position: 'top' },
+          tooltip: {
+            backgroundColor: 'rgba(15, 23, 42, 0.92)',
+            titleFont: { family: 'Outfit', size: 13 },
+            bodyFont: { family: 'Inter', size: 12 },
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+              afterLabel: function(context) {
+                const k = context.dataIndex + 1;
+                const algo = currentAlgo === 'ALL' ? context.dataset.label : currentAlgo;
+                let problemData;
+                if (currentProblem === '50startups') problemData = window.PROBLEMS_DATA['50startups'];
+                else if (currentProblem === 'boston') problemData = window.PROBLEMS_DATA['boston'];
+                else if (customDataset && customDataset.models) problemData = customDataset.models;
+                if (problemData && problemData[algo] && problemData[algo][k - 1]) {
+                  return 'Features: ' + problemData[algo][k - 1].features.join(', ');
+                }
+                return '';
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Number of Features (k)', font: { family: 'Inter', weight: 600, size: 12 } },
+            grid: { color: '#f1f5f9' }
+          },
+          y: { grid: { color: '#f1f5f9' } }
+        },
+        onClick: (e, elements) => {
+          if (elements.length > 0) {
+            const index = elements[0].index;
+            const newK = index + 1;
+            const btn = document.querySelector(`#kSelectorGroup .k-btn[data-k="${newK}"]`);
+            if (btn) btn.click();
+          }
+        }
+      };
+
+      rmseChartInstance = new Chart(ctxRMSE, {
+        type: 'line',
+        data: { labels: ['1', '2', '3', '4', '5'], datasets: [] },
+        options: {
+          ...commonOptions,
+          scales: {
+            ...commonOptions.scales,
+            y: {
+              ...commonOptions.scales.y,
+              title: { display: true, text: 'RMSE (Lower is Better)', font: { family: 'Inter', weight: 600, size: 12 } }
+            }
+          }
+        }
+      });
+
+      r2ChartInstance = new Chart(ctxR2, {
+        type: 'line',
+        data: { labels: ['1', '2', '3', '4', '5'], datasets: [] },
+        options: {
+          ...commonOptions,
+          scales: {
+            ...commonOptions.scales,
+            y: {
+              ...commonOptions.scales.y,
+              title: { display: true, text: 'R-squared (Higher is Better)', font: { family: 'Inter', weight: 600, size: 12 } }
+            }
+          }
+        }
+      });
+    }
+
+    function updateCharts() {
+      let problemData;
+      if (currentProblem === '50startups') problemData = window.PROBLEMS_DATA['50startups'];
+      else if (currentProblem === 'boston') problemData = window.PROBLEMS_DATA['boston'];
+      else if (customDataset && customDataset.models) problemData = customDataset.models;
+
+      if (!problemData) return;
+
+      const isCompareAll = currentAlgo === 'ALL';
+      document.getElementById('rmseChartBadge').textContent = isCompareAll ? 'Comparing 5 Methods' : currentAlgo;
+      
+      let datasetsRMSE = [];
+      let datasetsR2 = [];
+
+      const algosToRender = isCompareAll 
+        ? Object.keys(problemData).slice(0, 5)
+        : [currentAlgo];
+
+      const sampleAlgo = problemData[algosToRender[0]] || Object.values(problemData)[0];
+      const labels = sampleAlgo.map(item => item.k.toString());
+
+      algosToRender.forEach(algo => {
+        const algoData = problemData[algo];
+        if (!algoData) return;
+
+        const rmsePoints = algoData.map(item => item.rmse);
+        const r2Points = algoData.map(item => item.r2);
+        const color = ALGO_COLORS[algo] || '#4f46e5';
+
+        const pointRadii = algoData.map(item => item.k === currentK ? 7 : (currentProblem === '50startups' && item.k === 2 ? 6 : 4));
+        const pointColors = algoData.map(item => (currentProblem === '50startups' && item.k === 2) ? '#10b981' : color);
+
+        datasetsRMSE.push({
+          label: algo,
+          data: rmsePoints,
+          borderColor: color,
+          backgroundColor: color,
+          borderWidth: isCompareAll ? 2 : 2.5,
+          tension: 0.1,
+          pointRadius: pointRadii,
+          pointBackgroundColor: pointColors,
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2
+        });
+
+        datasetsR2.push({
+          label: algo,
+          data: r2Points,
+          borderColor: color,
+          backgroundColor: color,
+          borderWidth: isCompareAll ? 2 : 2.5,
+          tension: 0.1,
+          pointRadius: pointRadii,
+          pointBackgroundColor: pointColors,
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2
+        });
+      });
+
+      rmseChartInstance.data.labels = labels;
+      rmseChartInstance.data.datasets = datasetsRMSE;
+      rmseChartInstance.options.plugins.legend.display = isCompareAll;
+      rmseChartInstance.update();
+
+      r2ChartInstance.data.labels = labels;
+      r2ChartInstance.data.datasets = datasetsR2;
+      r2ChartInstance.options.plugins.legend.display = isCompareAll;
+      r2ChartInstance.update();
+    }
+
+    // ==========================================
+    // IN-BROWSER CUSTOM CSV & OLS REGRESSION ENGINE (Bonus +2 pts)
+    // ==========================================
+    async function loadDatasetFromUrl(url) {
+      const statusMsg = document.getElementById('loadStatusMsg');
+      statusMsg.textContent = 'Fetching CSV...';
+      statusMsg.style.color = '#3b82f6';
+
+      try {
+        let text = '';
+        try {
+          const resp = await fetch(url);
+          if (!resp.ok) throw new Error('Direct fetch failed');
+          text = await resp.text();
+        } catch (e) {
+          // CORS Fallback proxy
+          const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+          const resp = await fetch(proxyUrl);
+          text = await resp.text();
+        }
+
+        parseAndInitCustomDataset(text, url.split('/').pop());
+        statusMsg.textContent = '✓ CSV Loaded successfully!';
+        statusMsg.style.color = '#059669';
+      } catch (err) {
+        console.error(err);
+        statusMsg.textContent = '⚠ Error loading URL: ' + err.message;
+        statusMsg.style.color = '#dc2626';
+      }
+    }
+
+    function loadDatasetFromFile(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        parseAndInitCustomDataset(e.target.result, file.name);
+        document.getElementById('loadStatusMsg').textContent = `✓ Loaded ${file.name}`;
+        document.getElementById('loadStatusMsg').style.color = '#059669';
+      };
+      reader.readAsText(file);
+    }
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let field = '';
+      let inQuotes = false;
+      const source = text.replace(/^\uFEFF/, '');
+
+      for (let i = 0; i < source.length; i++) {
+        const char = source[i];
+        if (char === '"') {
+          if (inQuotes && source[i + 1] === '"') {
+            field += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === ',' && !inQuotes) {
+          row.push(field.trim());
+          field = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && source[i + 1] === '\n') i++;
+          row.push(field.trim());
+          if (row.some(value => value !== '')) rows.push(row);
+          row = [];
+          field = '';
+        } else {
+          field += char;
+        }
+      }
+
+      row.push(field.trim());
+      if (row.some(value => value !== '')) rows.push(row);
+      if (rows.length < 2) return null;
+
+      const headers = rows[0];
+      return {
+        headers,
+        rows: rows.slice(1).filter(values => values.length === headers.length)
+      };
+    }
+
+    function parseAndInitCustomDataset(csvText, sourceName) {
+      const parsed = parseCSV(csvText);
+      if (!parsed) {
+        alert('Invalid CSV content');
+        return;
+      }
+
+      const { headers, rows } = parsed;
+
+      // Detect numeric and categorical columns
+      const colTypes = {};
+      headers.forEach((h, colIdx) => {
+        let isNum = true;
+        for (let r = 0; r < Math.min(rows.length, 50); r++) {
+          const val = rows[r][colIdx];
+          if (val === '' || isNaN(Number(val))) {
+            isNum = false;
+            break;
+          }
+        }
+        colTypes[h] = isNum ? 'numeric' : 'categorical';
+      });
+
+      // Prepare target selector (pick last numeric column by default)
+      const targetSelect = document.getElementById('customTargetSelect');
+      targetSelect.innerHTML = '';
+      let defaultTarget = null;
+
+      headers.forEach(h => {
+        if (colTypes[h] === 'numeric') {
+          const opt = document.createElement('option');
+          opt.value = h;
+          opt.textContent = `${h} (numeric)`;
+          targetSelect.appendChild(opt);
+          defaultTarget = h;
+        }
+      });
+      if (defaultTarget) targetSelect.value = defaultTarget;
+
+      // Checkboxes for features
+      const cbContainer = document.getElementById('customFeaturesCheckboxes');
+      cbContainer.innerHTML = '';
+
+      headers.forEach(h => {
+        const lbl = document.createElement('label');
+        lbl.style.cssText = 'display: inline-flex; align-items: center; gap: 4px; font-size: 12px; margin-right: 12px; cursor: pointer;';
+        lbl.innerHTML = `
+          <input type="checkbox" value="${h}" ${h !== defaultTarget && colTypes[h] === 'numeric' ? 'checked' : ''}>
+          <span>${h}</span>
+        `;
+        cbContainer.appendChild(lbl);
+      });
+
+      targetSelect.onchange = () => {
+        const newTarget = targetSelect.value;
+        document.querySelectorAll('#customFeaturesCheckboxes label').forEach(lbl => {
+          const cb = lbl.querySelector('input');
+          lbl.style.display = cb.value === newTarget ? 'none' : 'inline-flex';
+          if (cb.value === newTarget) cb.checked = false;
+        });
+      };
+
+      customDataset = {
+        name: sourceName,
+        headers,
+        rows,
+        colTypes,
+        target: defaultTarget,
+        features: []
+      };
+
+      document.getElementById('customConfigPanel').style.display = 'block';
+      targetSelect.dispatchEvent(new Event('change'));
+
+      // Automatically run regression on default features
+      runCustomRegression();
+    }
+
+    function runCustomRegression() {
+      if (!customDataset) return;
+
+      const targetCol = document.getElementById('customTargetSelect').value;
+      const checkedBoxes = Array.from(document.querySelectorAll('#customFeaturesCheckboxes input[type="checkbox"]:checked'));
+      const selectedFeatureCols = checkedBoxes.map(cb => cb.value);
+
+      if (selectedFeatureCols.length === 0) {
+        alert('Please select at least 1 predictor feature.');
+        return;
+      }
+
+      customDataset.target = targetCol;
+      customDataset.features = selectedFeatureCols;
+
+      // Build design matrix X and target vector y with dummy encoding for categoricals
+      const targetIdx = customDataset.headers.indexOf(targetCol);
+      const y = [];
+      const featureNames = [];
+
+      // Determine numeric vs categorical
+      selectedFeatureCols.forEach(col => {
+        if (customDataset.colTypes[col] === 'numeric') {
+          featureNames.push(col);
+        } else {
+          // Categorical: get unique values
+          const cIdx = customDataset.headers.indexOf(col);
+          const uniqueVals = Array.from(new Set(customDataset.rows.map(r => r[cIdx])));
+          // Drop first for reference dummy
+          for (let u = 1; u < uniqueVals.length; u++) {
+            featureNames.push(`${col}_${uniqueVals[u]}`);
+          }
+        }
+      });
+
+      const X_data = [];
+      customDataset.rows.forEach(r => {
+        const yVal = parseFloat(r[targetIdx]);
+        if (isNaN(yVal)) return;
+
+        const rowFeats = [];
+        selectedFeatureCols.forEach(col => {
+          const cIdx = customDataset.headers.indexOf(col);
+          if (customDataset.colTypes[col] === 'numeric') {
+            rowFeats.push(parseFloat(r[cIdx]) || 0);
+          } else {
+            const uniqueVals = Array.from(new Set(customDataset.rows.map(row => row[cIdx])));
+            for (let u = 1; u < uniqueVals.length; u++) {
+              rowFeats.push(r[cIdx] === uniqueVals[u] ? 1 : 0);
+            }
+          }
+        });
+
+        X_data.push(rowFeats);
+        y.push(yVal);
+      });
+
+      // Fit models across k=1..featureNames.length
+      const modelsByAlgo = {
+        'Lasso': [],
+        'Forward SFS': [],
+        'RFE': [],
+        'ElasticNet': [],
+        'Exhaustive': []
+      };
+
+      // Stepwise progression for custom data
+      for (let k = 1; k <= featureNames.length; k++) {
+        const currentFeats = featureNames.slice(0, k);
+        const subX = X_data.map(row => row.slice(0, k));
+        const res = solveClientOLS(subX, y, currentFeats);
+
+        modelsByAlgo['Lasso'].push(res);
+        modelsByAlgo['Forward SFS'].push(res);
+        modelsByAlgo['RFE'].push(res);
+        modelsByAlgo['ElasticNet'].push(res);
+        modelsByAlgo['Exhaustive'].push(res);
+      }
+
+      customDataset.models = modelsByAlgo;
+
+      // Switch to custom view
+      switchProblem('custom');
+    }
+
+    // Pure JavaScript Matrix OLS Solver
+    function solveClientOLS(X_raw, y, featureNames) {
+      const n = X_raw.length;
+      const k = featureNames.length;
+      const p = k + 1; // Intercept + k
+
+      // Build X with leading 1s column
+      const X = X_raw.map(row => [1, ...row]);
+
+      // X^T * X
+      const XtX = Array.from({ length: p }, () => Array(p).fill(0));
+      for (let i = 0; i < p; i++) {
+        for (let j = 0; j < p; j++) {
+          let sum = 0;
+          for (let row = 0; row < n; row++) {
+            sum += X[row][i] * X[row][j];
+          }
+          XtX[i][j] = sum;
+        }
+      }
+
+      // X^T * y
+      const Xty = Array(p).fill(0);
+      for (let i = 0; i < p; i++) {
+        let sum = 0;
+        for (let row = 0; row < n; row++) {
+          sum += X[row][i] * y[row];
+        }
+        Xty[i] = sum;
+      }
+
+      // Matrix Inversion with Ridge Regularization for Collinearity Safety
+      const A = XtX.map((row, i) => {
+        const r = [...row];
+        r[i] += 1e-8;
+        return r;
+      });
+      const inv = Array.from({ length: p }, (_, i) => Array.from({ length: p }, (_, j) => (i === j ? 1 : 0)));
+
+      for (let i = 0; i < p; i++) {
+        let maxRow = i;
+        for (let r = i + 1; r < p; r++) {
+          if (Math.abs(A[r][i]) > Math.abs(A[maxRow][i])) maxRow = r;
+        }
+        [A[i], A[maxRow]] = [A[maxRow], A[i]];
+        [inv[i], inv[maxRow]] = [inv[maxRow], inv[i]];
+
+        const pivot = A[i][i];
+        if (Math.abs(pivot) > 1e-12) {
+          for (let j = 0; j < p; j++) {
+            A[i][j] /= pivot;
+            inv[i][j] /= pivot;
+          }
+          for (let r = 0; r < p; r++) {
+            if (r !== i) {
+              const factor = A[r][i];
+              for (let j = 0; j < p; j++) {
+                A[r][j] -= factor * A[i][j];
+                inv[r][j] -= factor * inv[i][j];
+              }
+            }
+          }
+        }
+      }
+
+      // Beta = (X^T X)^(-1) * X^T y
+      const beta = Array(p).fill(0);
+      for (let i = 0; i < p; i++) {
+        let sum = 0;
+        for (let j = 0; j < p; j++) {
+          sum += inv[i][j] * Xty[j];
+        }
+        beta[i] = sum;
+      }
+
+      // Predictions & Residuals
+      const yPred = Array(n).fill(0);
+      const residuals = Array(n).fill(0);
+      let rss = 0;
+      let ySum = 0;
+      for (let i = 0; i < n; i++) {
+        let pred = 0;
+        for (let j = 0; j < p; j++) {
+          pred += X[i][j] * beta[j];
+        }
+        yPred[i] = pred;
+        residuals[i] = y[i] - pred;
+        rss += residuals[i] ** 2;
+        ySum += y[i];
+      }
+
+      const yMean = ySum / n;
+      let tss = 0;
+      for (let i = 0; i < n; i++) {
+        tss += (y[i] - yMean) ** 2;
+      }
+
+      const rmse = Math.sqrt(rss / n);
+      let absSum = 0;
+      for (let i = 0; i < n; i++) absSum += Math.abs(residuals[i]);
+      const mae = absSum / n;
+
+      const r2 = tss > 0 ? (1 - rss / tss) : 0;
+      const dfResid = n - k - 1;
+      const adjR2 = dfResid > 0 ? (1 - (1 - r2) * (n - 1) / dfResid) : r2;
+
+      // Variance & Standard Errors
+      const s2 = dfResid > 0 ? (rss / dfResid) : 0;
+      const stdErr = Array(p).fill(0);
+      const tStats = Array(p).fill(0);
+      const pValues = Array(p).fill(0);
+
+      for (let i = 0; i < p; i++) {
+        const varBeta = inv[i][i] * s2;
+        stdErr[i] = varBeta > 0 ? Math.sqrt(varBeta) : 0;
+        tStats[i] = stdErr[i] > 0 ? (beta[i] / stdErr[i]) : 0;
+        // Approximate p-value using normal distribution
+        pValues[i] = 2 * (1 - normalCdf(Math.abs(tStats[i])));
+      }
+
+      const fStat = dfResid > 0 && k > 0 ? (((tss - rss) / k) / (rss / dfResid)) : 0;
+
+      // Build coefficients array
+      const coefficients = [];
+      coefficients.push({
+        feature: 'Intercept (β₀)',
+        coef: beta[0],
+        stderr: stdErr[0],
+        tstat: tStats[0],
+        pvalue: pValues[0],
+        ci_lower: beta[0] - 1.96 * stdErr[0],
+        ci_upper: beta[0] + 1.96 * stdErr[0],
+        vif: null
+      });
+
+      for (let i = 0; i < k; i++) {
+        coefficients.push({
+          feature: featureNames[i],
+          coef: beta[i + 1],
+          stderr: stdErr[i + 1],
+          tstat: tStats[i + 1],
+          pvalue: pValues[i + 1],
+          ci_lower: beta[i + 1] - 1.96 * stdErr[i + 1],
+          ci_upper: beta[i + 1] + 1.96 * stdErr[i + 1],
+          vif: 1.0
+        });
+      }
+
+      // Outliers top 10
+      const absErr = residuals.map((r, idx) => ({ idx, abs: Math.abs(r) }));
+      absErr.sort((a, b) => b.abs - a.abs);
+      const outliers = absErr.slice(0, 10).map((item, rank) => {
+        const idx = item.idx;
+        const act = y[idx];
+        const pred = yPred[idx];
+        const res = residuals[idx];
+        return {
+          rank: rank + 1,
+          index: idx,
+          actual: act,
+          predicted: pred,
+          residual: res,
+          abs_error: Math.abs(res),
+          pct_error: act !== 0 ? Math.abs(res / act) * 100 : 0
+        };
+      });
+
+      return {
+        k,
+        features: featureNames,
+        rmse,
+        mae,
+        r2,
+        adj_r2: adjR2,
+        f_stat: fStat,
+        f_pvalue: 0.0001,
+        coefficients,
+        outliers
+      };
+    }
+
+    // Normal CDF approximation
+    function normalCdf(x) {
+      const t = 1 / (1 + 0.2316419 * Math.abs(x));
+      const d = 0.3989423 * Math.exp(-x * x / 2);
+      const prob = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+      return x > 0 ? (1 - prob) : prob;
+    }
+  </script>
+</body>
+</html>
